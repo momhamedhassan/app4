@@ -1,7 +1,7 @@
 const { response } = require('express');
 const express =require ('express');
 const ProductRoute =require('../restApi/route/product.route');
-const TokenRoute =require('../restApi/route/token.route');
+
 const app =express();
 const createError=require('http-errors');
 app.use(express.json());
@@ -16,7 +16,7 @@ app.all('/test',(req,res)=>{
 console.log(req.body);
 res.send(req.body);
 })
-app.use('/token',TokenRoute);
+
 app.use('/products',ProductRoute);
 
 
