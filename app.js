@@ -1,6 +1,6 @@
 const { response } = require('express');
 const express =require ('express');
-const ProductRoute =require('../restApi/route/product.route');
+const ProductRoute =require('./route/product.route');
 
 const app =express();
 const createError=require('http-errors');
