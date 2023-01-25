@@ -1,0 +1,56 @@
+GET http://localhost:3000/products
+###
+GET http://localhost:3000/token
+###
+POST http://localhost:3000/token
+Content-Type: application/json
+
+{
+    "token":"sa3d",
+    "App":"nshsh",
+    "channel":"kokoko"
+}
+
+
+### create product
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+    "name":"sa3d",
+    "price":464664
+}
+
+
+
+### get a product by id
+GET http://localhost:3000/products/639d772f173208c701af9e6c
+
+### update a product by id
+PATCH  http://localhost:4000/products/63997efc6b22caf957d21e5
+Content-Type: application/json
+
+{
+    
+    "price":1799
+}
+
+
+### delete a product by id
+DELETE http://localhost:4000/products/63997f6f6b22caf957d21e60
+
+
+
+
+
+### 404 route not found
+GET http://localhost:4000/nohfh
+
+###
+POST http://localhost:4000/test
+Content-Type: application/json
+
+{
+    "name":"imacpro",
+    "price":4999
+}
