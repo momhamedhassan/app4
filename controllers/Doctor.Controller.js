@@ -1,18 +1,18 @@
 
 const createError =require('http-errors');
 const { default: mongoose } = require('mongoose');
-const Product =require('../Models/Product.model');
+const Doctor =require('../Models/Doctor.Model');
 
 module.exports=
 {
   
-getAllProducts:async (req,res,next)=>{
+getAllDoctors:async (req,res,next)=>{
     //next(new Error("cannont geta list of all products"))
     //res.send("getting a list of all products");
 
     try {
         //const results = await Product.find({},{__v:0})
-        const results = await Product.find({},{name:1 , _id:1,price:1})
+        const results = await Doctor.find({},{})
         
         res.send(results)
     } catch (error) {
@@ -23,13 +23,13 @@ getAllProducts:async (req,res,next)=>{
 },
 
 
-findProductById:async(req,res,next)=>{
+findDoctorById:async(req,res,next)=>{
     const id =req.params.id;
 
     try {
-    const product =await Product.findById(id)
+    const doctor =await Doctor.findById(id)
    // const product =await Product.findOne({_id:id})
-   if(!product){
+   if(!doctor){
 throw createError(404,"Product does not exist")
 
    }
@@ -49,9 +49,9 @@ throw createError(404,"Product does not exist")
 } ,
 
 
-PostProduct:async (req,res,next)=>{
+PostDoctor:async (req,res,next)=>{
 
-    try { const product=new Product(req.body);
+    try { const product=new Doctor(req.body);
         const result=await product.save()
         res.send(result);
         
@@ -81,11 +81,11 @@ PostProduct:async (req,res,next)=>{
 },
 
 
-DeleteProduct:async(req,res,next)=>{
+DeleteDoctor:async(req,res,next)=>{
     const id =req.params.id
     
     try {
-        const result =await Product.findByIdAndDelete(id)
+        const result =await Doctor.findByIdAndDelete(id)
         if(!result){
             throw createError(404,"Product does not exist")
             
@@ -105,7 +105,7 @@ DeleteProduct:async(req,res,next)=>{
 } ,
 
 
-UpdateProductById:async(req,res,next)=>{
+UpdateDoctorById:async(req,res,next)=>{
 
         // res.send("updating a single product")
           try 
@@ -113,7 +113,7 @@ UpdateProductById:async(req,res,next)=>{
             const id = req.params.id;
             const updates=req.body;
             const options={new :true}
-            const result =await Product.findByIdAndUpdate(id,updates, options);
+            const result =await Doctor.findByIdAndUpdate(id,updates, options);
         
             if(!result){throw createError(404,"Product does not exist ")}
             res.send(result)

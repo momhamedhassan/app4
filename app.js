@@ -1,6 +1,6 @@
 const { response } = require('express');
 const express =require ('express');
-const ProductRoute =require('./route/product.route');
+const ProductRoute =require('./route/Doctor.route');
 
 const app =express();
 const createError=require('http-errors');
@@ -17,7 +17,7 @@ console.log(req.body);
 res.send(req.body);
 })
 
-app.use('/products',ProductRoute);
+app.use('/Doctors',ProductRoute);
 
 
 
