@@ -1,14 +1,14 @@
-GET http://localhost:3000/products
+GET http://localhost:3000/Doctors
+
 ###
 GET http://localhost:3000/token
 ###
-POST http://localhost:3000/token
+POST http://localhost:3000/Doctors
 Content-Type: application/json
 
 {
-    "token":"sa3d",
-    "App":"nshsh",
-    "channel":"kokoko"
+    "doctorName":"omar Hefzy",
+    "doctorSpeciality":"Dermatologist"
 }
 
 
