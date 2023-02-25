@@ -1,6 +1,7 @@
 
 const createError =require('http-errors');
 const { default: mongoose } = require('mongoose');
+var MongoClient=require('mongodb').MongoClient;
 const Doctor =require('../Models/Doctor.Model');
 
 module.exports=
@@ -51,9 +52,16 @@ throw createError(404,"Product does not exist")
 
 PostDoctor:async (req,res,next)=>{
 
-    try { const product=new Doctor(req.body);
-        const result=await product.save()
-        res.send(result);
+    try { 
+        //const product=new Doctor(req.body);
+
+        // const result=await product.save()
+        // res.send(result);
+        // console.log(result);
+        // console.log(req.body);
+        const product= await Doctor.create(req.body);
+        console.log(product)
+        res.send(product)
         
     } catch (error) {
         console.log(error.message)
@@ -126,5 +134,28 @@ UpdateDoctorById:async(req,res,next)=>{
             {return next(createError(400,"Invalid Product Id"))}
             next(error)
           }  
+},
+getPateint:async(req,res,next)=>{
+    MongoClient.connect(url,function(err,db){
+        if(err) throw err;
+        var dbo=db.db("RestApi");
+        dbo.collection("doctors").find({}).toArray(function(err, result) {
+            if (err) throw err;
+            console.log(result);
+            db.close();
+          });
+        });
+    try 
+    {
+     
+    } 
+       
+    catch (error) 
+    {
+      console.log(error.message)
+      if (error instanceof mongoose.CastError)
+      {return next(createError(400,"Invalid Product Id"))}
+      next(error)
+    }  
 } 
 }
