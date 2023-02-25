@@ -4,6 +4,9 @@ const DoctorController = require('../controllers/Doctor.Controller');
 const DoctorReviewController = require('../controllers/Review.Controller.js');
 
 
+router.get('/Reviews',DoctorReviewController.getAllDoctorReviews);
+
+router.post('/Reviews',DoctorReviewController.PostDoctorReview);
 //router.get('/',ProductController.getAllToken);
 //Get all Product
 router.get('/',DoctorController.getAllDoctors);
@@ -17,8 +20,5 @@ router.patch('/:id',DoctorController.UpdateDoctorById);
 //delete product
 router.delete('/:id',DoctorController.DeleteDoctor);
 
-router.get('/Reviews',DoctorReviewController.getAllDoctorReviews);
-
-router.post('/Reviews',DoctorReviewController.PostDoctorReview);
 
 module.exports = router;
