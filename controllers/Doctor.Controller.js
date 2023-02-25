@@ -21,10 +21,11 @@ getAllDoctors:async (req,res,next)=>{
 },
 findDoctorById:async(req,res,next)=>{
     const id =req.params.id;
+    console.log(id)
 
     try {
-    const doctor =await Doctor.findById(id)
-   // const product =await Product.findOne({_id:id})
+    //const doctor =await Doctor.findById(id)
+    const doctor =await Product.find({_id:id})
    if(!doctor){
 throw createError(404,"Product does not exist")
 
@@ -104,12 +105,14 @@ DeleteDoctor:async(req,res,next)=>{
 } ,
 UpdateDoctorById:async(req,res,next)=>{
 
+
+    const id = req.params.id;
+    const updates=req.body;
+    const options={new :true}
         // res.send("updating a single product")
           try 
           {
-            const id = req.params.id;
-            const updates=req.body;
-            const options={new :true}
+           
             const result =await Doctor.findByIdAndUpdate(id,updates, options);
         
             if(!result){throw createError(404,"Product does not exist ")}
