@@ -20,17 +20,11 @@ experience_years:{
 },
 about_doctor:{
     type:String
-    },
-// doctorImgUrl:{
-// type:URL
-// }
-// workedAreas:{
-// type:Array,"default":[]
-//         },
-// degrees:{
-// type:Array,"default":[]
-//     },
-// workingAddress:{type:URL},
+},
+ doctorImgUrl:{
+type:String
+},
+
 });
 
 const Doctor =mongoose.model('doctor',DoctorSchema);

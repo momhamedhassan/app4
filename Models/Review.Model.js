@@ -7,6 +7,7 @@ img:{
 patientName:{
     type:String
 },
+DoctorId:{type:String},
 Rating:{
     type:String
 },

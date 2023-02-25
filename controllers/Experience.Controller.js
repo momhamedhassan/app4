@@ -1,16 +1,16 @@
 const createError =require('http-errors');
 const { default: mongoose } = require('mongoose');
-const Doctor =require('../Models/Doctor.Model');
+const DoctorEperience =require('../Models/Experience.Model');
 
 module.exports=
-{
-getAllDoctors:async (req,res,next)=>{
+{  
+getAllDoctorExperience:async (req,res,next)=>{
     //next(new Error("cannont geta list of all products"))
     //res.send("getting a list of all products");
 
     try {
         //const results = await Product.find({},{__v:0})
-        const results = await Doctor.find({},{})
+        const results = await DoctorEperience.find({},{})
         
         res.send(results)
     } catch (error) {
@@ -19,11 +19,11 @@ getAllDoctors:async (req,res,next)=>{
 
 
 },
-findDoctorById:async(req,res,next)=>{
+findDoctorExperienceById:async(req,res,next)=>{
     const id =req.params.id;
 
     try {
-    const doctor =await Doctor.findById(id)
+    const doctor =await DoctorEperience.findById(id)
    // const product =await Product.findOne({_id:id})
    if(!doctor){
 throw createError(404,"Product does not exist")
@@ -43,7 +43,7 @@ throw createError(404,"Product does not exist")
 
 
 } ,
-PostDoctor:async (req,res,next)=>{
+PostDoctorExperience:async (req,res,next)=>{
 
     try { 
         //const product=new Doctor(req.body);
@@ -52,7 +52,7 @@ PostDoctor:async (req,res,next)=>{
         // res.send(result);
         // console.log(result);
         // console.log(req.body);
-        const product= await Doctor.create(req.body);
+        const product= await DoctorEperience.create(req.body);
         console.log(product)
         res.send(product)
         
@@ -80,11 +80,11 @@ PostDoctor:async (req,res,next)=>{
     
 
 },
-DeleteDoctor:async(req,res,next)=>{
+DeleteDoctorExperience:async(req,res,next)=>{
     const id =req.params.id
     
     try {
-        const result =await Doctor.findByIdAndDelete(id)
+        const result =await DoctorEperience.findByIdAndDelete(id)
         if(!result){
             throw createError(404,"Product does not exist")
             
@@ -102,7 +102,7 @@ DeleteDoctor:async(req,res,next)=>{
     }
     
 } ,
-UpdateDoctorById:async(req,res,next)=>{
+UpdateDoctorExperienceById:async(req,res,next)=>{
 
         // res.send("updating a single product")
           try 
@@ -110,7 +110,7 @@ UpdateDoctorById:async(req,res,next)=>{
             const id = req.params.id;
             const updates=req.body;
             const options={new :true}
-            const result =await Doctor.findByIdAndUpdate(id,updates, options);
+            const result =await DoctorEperience.findByIdAndUpdate(id,updates, options);
         
             if(!result){throw createError(404,"Product does not exist ")}
             res.send(result)
@@ -123,28 +123,4 @@ UpdateDoctorById:async(req,res,next)=>{
             {return next(createError(400,"Invalid Product Id"))}
             next(error)
           }  
-},
-getPateint:async(req,res,next)=>{
-    MongoClient.connect(url,function(err,db){
-        if(err) throw err;
-        var dbo=db.db("RestApi");
-        dbo.collection("doctors").find({}).toArray(function(err, result) {
-            if (err) throw err;
-            console.log(result);
-            db.close();
-          });
-        });
-    try 
-    {
-     
-    } 
-       
-    catch (error) 
-    {
-      console.log(error.message)
-      if (error instanceof mongoose.CastError)
-      {return next(createError(400,"Invalid Product Id"))}
-      next(error)
-    }  
-} 
-}
+},}

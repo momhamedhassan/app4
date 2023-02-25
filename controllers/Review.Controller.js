@@ -1,12 +1,9 @@
-
 const createError =require('http-errors');
 const { default: mongoose } = require('mongoose');
-var MongoClient=require('mongodb').MongoClient;
 const DoctorReview =require('../Models/Review.Model.js');
 
 module.exports=
-{
-  
+{ 
 getAllDoctorReviews:async (req,res,next)=>{
     //next(new Error("cannont geta list of all products"))
     //res.send("getting a list of all products");
@@ -58,16 +55,75 @@ PostDoctorReview:async (req,res,next)=>{
    
     
 
-}}
-// try{const Review = await DoctorReview.create({
-//     img:"mohamed",
-//     patientName:"mohamed",
-//     Rating:"mohamed",
-//     feedBackContent:"mohamed",
-//     date:"mohamed",
-//     waitingTime:"mohamed",
-//     bedSideManner:"mohamed",
-//     consulting:"mohamed"
-//     })}catch(err){
-//         console.log(error)
-//     }
+},
+findDoctorReviewById:async(req,res,next)=>{
+    const id =req.params.id;
+
+    try {
+    const doctor =await DoctorReview.find({ DoctorId: id })
+   // const product =await Product.findOne({_id:id})
+   if(!doctor){
+throw createError(404,"Product does not exist")
+
+   }
+  
+    res.send(doctor)
+} catch (error) {
+    console.log(error.message);
+    if(error instanceof mongoose.CastError){
+
+        next(createError(400,"Invalid product id"))
+        return;
+    }
+    next(error);
+}
+
+
+},
+DeleteDoctorReview:async(req,res,next)=>{
+    const id =req.params.id
+    
+    try {
+        const result =await DoctorReview.findByIdAndDelete(id)
+        if(!result){
+            throw createError(404,"Product does not exist")
+            
+               }
+        console.log(result)
+        res.send(result)
+    } catch (error) {
+        console.log(error.message)
+        if(error instanceof mongoose.CastError){
+    
+            next(createError(400,"Invalid product id"))
+            return;
+        }
+        next(error);
+    }
+    
+} ,
+UpdateDoctorReviewById:async(req,res,next)=>{
+    const id = req.params.id;
+    const updates=req.body;
+    const options={new :true}
+    // res.send("updating a single product")
+      try 
+      {
+        
+       
+        const result =await DoctorReview.findByIdAndUpdate(id,updates, options);
+    
+        if(!result){throw createError(404,"Product does not exist ")}
+        res.send(result)
+      } 
+         
+      catch (error) 
+      {
+        console.log(error.message)
+        if (error instanceof mongoose.CastError)
+        {return next(createError(400,"Invalid Product Id"))}
+        next(error)
+      }  
+}
+}
+
