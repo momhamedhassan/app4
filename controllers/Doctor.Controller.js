@@ -24,8 +24,8 @@ findDoctorById:async(req,res,next)=>{
     console.log(id)
 
     try {
-    //const doctor =await Doctor.findById(id)
-    const doctor =await Product.find({_id:id})
+    const doctor =await Doctor.findById(id)
+    //const doctor =await Product.find({_id:id})
    if(!doctor){
 throw createError(404,"Product does not exist")
 
