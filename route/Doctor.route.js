@@ -4,10 +4,11 @@ const DoctorController = require('../controllers/Doctor.Controller');
 const DoctorReviewController = require('../controllers/Review.Controller.js');
 const DoctorExperienceController=require('../controllers/Experience.Controller');
 
-router.get ('/Experience',DoctorExperienceController.getAllDoctorExperience);
-router.post  ('/Experience',DoctorExperienceController.PostDoctorExperience);
-router.delete('/Experience/:id',DoctorExperienceController.DeleteDoctorExperience)
-router.patch('/Experience/:id',DoctorExperienceController.UpdateDoctorExperienceById);
+router.get    ('/Experience',DoctorExperienceController.getAllDoctorExperience);
+router.get    ('/Experience/:id',DoctorExperienceController.findDoctorExperienceById);
+router.post   ('/Experience',DoctorExperienceController.PostDoctorExperience);
+router.delete ('/Experience/:id',DoctorExperienceController.DeleteDoctorExperience)
+router.patch  ('/Experience/:id',DoctorExperienceController.UpdateDoctorExperienceById);
 
 router.get('/Reviews',DoctorReviewController.getAllDoctorReviews);
 router.get('/Reviews/:id',DoctorReviewController.findDoctorReviewById);
