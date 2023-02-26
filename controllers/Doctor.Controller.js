@@ -24,14 +24,14 @@ findDoctorById:async(req,res,next)=>{
     console.log(id)
 
     try {
-    const doctor =await Doctor.findById(id)
+    const doctor =await Doctor.findById(id).exec();
     //const doctor =await Product.find({_id:id})
    if(!doctor){
 throw createError(404,"Product does not exist")
 
    }
   
-    res.send(product)
+    res.send(doctor)
 } catch (error) {
     console.log(error.message);
     if(error instanceof mongoose.CastError){
