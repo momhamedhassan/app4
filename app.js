@@ -1,6 +1,9 @@
 
 const express =require ('express');
 const ProductRoute =require('./route/Doctor.route');
+const ReviewRoute=require('./route/Review.route');
+const ExperienceRoute=require('./route/DoctorExperience');
+const PatientRoute=require('./route/Patient.route')
 const app =express();
 const createError=require('http-errors');
 app.use(express.json());
@@ -8,7 +11,9 @@ const dotenv =require('dotenv').config();
 
 
 //Initialize DB
-require('./initDB')();
+require('./Database/intialDataBaseConnection')();
+//require('./Database/PatientDataBase')();
+
 
 
 app.all('/test',(req,res)=>{
@@ -18,8 +23,9 @@ res.send(req.body);
 
 
 app.use('/Doctors',ProductRoute);
-//app.use('/Doctors/Reviews',DoctorReviewRoute);
-
+app.use('/Reviews',ReviewRoute);
+app.use('/DoctorExperience',ExperienceRoute);
+app.use('/Patients',PatientRoute)
 
 app.use((req,res,next)=>{
     next(createError(404,"Not found"))

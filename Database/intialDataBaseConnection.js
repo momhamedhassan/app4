@@ -3,7 +3,6 @@ module.exports = () =>{
     mongoose.set('strictQuery', false);
     mongoose.connect("mongodb+srv://cluster0.bshgjjp.mongodb.net/?retryWrites=true&w=majority",
     {
-        dbname:"RestApi",
         user:"mohamed",
         pass:"mohamed",
         useNewUrlParser:true,

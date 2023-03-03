@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 const Schema = mongoose.Schema;
-const DoctorSchema =new Schema({
+const PatientSchema =new Schema({
 doctorName:{
 type:String,
 required:true
@@ -27,7 +27,7 @@ type:String
 
 });
 
-const myDB =mongoose.connection.useDb('RestApi');
-const Doctor =myDB.model('doctor',DoctorSchema);
+const myDB =mongoose.connection.useDb('Patient');
+const Patient =myDB.model('patientinfo',PatientSchema);
 
-module.exports=Doctor;
+module.exports=Patient;

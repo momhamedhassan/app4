@@ -24,7 +24,7 @@ consulting:{type:String},
 
 
 });
-
-const DoctorReview = mongoose.model('Reviews',DoctorReviewSchema);
+const myDB =mongoose.connection.useDb('RestApi');
+const DoctorReview = myDB.model('Reviews',DoctorReviewSchema);
 
 module.exports=DoctorReview;

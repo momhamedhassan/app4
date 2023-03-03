@@ -6,6 +6,6 @@ const DoctorExperienceSchema =new Schema({
     degreeImg:[String],
     DoctorId:{type:String}
 })
-
-const DoctorExperience = mongoose.model('Experience',DoctorExperienceSchema);
+const myDB =mongoose.connection.useDb('RestApi');
+const DoctorExperience = myDB.model('Experience',DoctorExperienceSchema);
 module.exports=DoctorExperience;
