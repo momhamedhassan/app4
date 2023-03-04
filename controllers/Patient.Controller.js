@@ -40,6 +40,21 @@ module.exports=
        
         
     
-    }
+    },
+    getAllPatients:async (req,res,next)=>{
+        //next(new Error("cannont geta list of all products"))
+        //res.send("getting a list of all products");
+    
+        try {
+            //const results = await Product.find({},{__v:0})
+            const results = await Doctor.find({},{})
+            
+            res.send(results)
+        } catch (error) {
+            console.log(error.message);
+        }
+    
+    
+    },
 
 }
