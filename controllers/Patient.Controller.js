@@ -47,7 +47,7 @@ module.exports=
     
         try {
             //const results = await Product.find({},{__v:0})
-            const results = await Doctor.find({},{})
+            const results = await Patient.find({},{})
             
             res.send(results)
         } catch (error) {
