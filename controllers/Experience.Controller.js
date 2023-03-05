@@ -23,9 +23,9 @@ findDoctorExperienceById:async(req,res,next)=>{
     const id =req.params.id;
 
     try {
-    const doctor =await DoctorEperience.findById(id)
+   // const doctor =await DoctorEperience.findById(id)
     //const product =await DoctorEperience.findOne({_id:id})
-   //const doctor =await DoctorEperience.find({DoctorId:id})
+   const doctor =await DoctorEperience.find({DoctorId:id})
    if(!doctor){
 throw createError(404,"Product does not exist")
 
