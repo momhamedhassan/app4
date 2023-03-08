@@ -4,6 +4,7 @@ const ProductRoute =require('./route/Doctor.route');
 const ReviewRoute=require('./route/Review.route');
 const ExperienceRoute=require('./route/DoctorExperience');
 const PatientRoute=require('./route/Patient.route')
+const AppointmentRoute=require('./route/Appointments.route')
 const app =express();
 const createError=require('http-errors');
 app.use(express.json());
@@ -26,6 +27,7 @@ app.use('/Doctors',ProductRoute);
 app.use('/Reviews',ReviewRoute);
 app.use('/DoctorExperience',ExperienceRoute);
 app.use('/Patients',PatientRoute)
+app.use('/Appointments',AppointmentRoute);
 
 app.use((req,res,next)=>{
     next(createError(404,"Not found"))
