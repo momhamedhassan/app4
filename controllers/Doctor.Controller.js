@@ -127,27 +127,4 @@ UpdateDoctorById:async(req,res,next)=>{
             next(error)
           }  
 },
-getPateint:async(req,res,next)=>{
-    MongoClient.connect(url,function(err,db){
-        if(err) throw err;
-        var dbo=db.db("RestApi");
-        dbo.collection("doctors").find({}).toArray(function(err, result) {
-            if (err) throw err;
-            console.log(result);
-            db.close();
-          });
-        });
-    try 
-    {
-     
-    } 
-       
-    catch (error) 
-    {
-      console.log(error.message)
-      if (error instanceof mongoose.CastError)
-      {return next(createError(400,"Invalid Product Id"))}
-      next(error)
-    }  
-} 
 }

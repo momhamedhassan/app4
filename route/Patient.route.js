@@ -5,7 +5,8 @@ const PatientController=require('../controllers/Patient.Controller');
 
 router.post    ('/',PatientController.PostPatient);
 router.get    ('/',PatientController.getAllPatients);
+router.get    ('/:id',PatientController.getAPatientById);
 //router.post   ('/',PatientController.PostDoctorExperience);
-//router.delete ('/:id',PatientController.DeleteDoctorExperience)
-//router.patch  ('/:id',PatientController.UpdateDoctorExperienceById);
+router.delete ('/:id',PatientController.DeletePatientById);
+router.patch  ('/:id',PatientController.UpdatePatientById);
 module.exports = router;

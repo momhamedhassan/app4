@@ -1,9 +1,9 @@
-GET http://localhost:3000/Doctors
+GET https://test-third-baseline.onrender.com/Doctors
 
 ###
-GET http://localhost:3000/token
+GET http://localhost:3005/Patients
 ###
-POST http://localhost:3000/Doctors
+POST http://localhost:3005/Patients
 Content-Type: application/json
 {
     "doctorName":"abdalla Alaa",
@@ -12,12 +12,14 @@ Content-Type: application/json
 
 
 ### create product
-POST http://localhost:3000/products
+POST http://localhost:3005/Patients
 Content-Type: application/json
 
 {
-    "name":"abdal",
-    "price":464664
+    "PatientName":"abdal",
+    "Patient_Age":464664,
+    "PatientImgUrl":"mohamed"
+
 }
 
 
