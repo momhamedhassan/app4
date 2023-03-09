@@ -1,16 +1,21 @@
 const mongoose= require('mongoose')
 const Schema=mongoose.Schema;
+const ObjectId =mongoose.Types.ObjectId;
 const AppointmentSchema = new Schema({
     PatientId:{
         type:String
     },
-    DoctorId:{
-        type:String
+    Patient:{
+        type:ObjectId,ref:'Patient'
+    }
+    ,
+    Doctor:{
+        type:ObjectId,ref:'Doctor'
     },
     AppointmentDate:{
         type:String
     },
-    AppointmentTime:{
+    AppointmentTime:{ 
         type:String
     },
     PateintRequest:{

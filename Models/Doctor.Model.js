@@ -28,6 +28,6 @@ type:String
 });
 
 const myDB =mongoose.connection.useDb('RestApi');
-const Doctor =myDB.model('doctor',DoctorSchema);
+const Doctor =myDB.model('Doctor',DoctorSchema);
 
 module.exports=Doctor;

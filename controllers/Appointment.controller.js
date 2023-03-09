@@ -1,8 +1,8 @@
 const createError =require('http-errors');
 const { default: mongoose } = require('mongoose');
-const appointment = require('../Models/Appointment.Model');
 const Appintment =require('../Models/Appointment.Model');
-
+const DoctorModel=require('../Models/Doctor.Model')
+const PatientModel=require('../Models/Patient.Model')
 module.exports=
 {
 getAllAppointments:async (req,res,next)=>{
@@ -11,7 +11,7 @@ getAllAppointments:async (req,res,next)=>{
 
     try {
         //const results = await Product.find({},{__v:0})
-        const results = await Appintment.find({},{})
+        const results = await Appintment.find({},{}).populate({path:'Doctor',model:DoctorModel}).populate({path:'Patient',model:PatientModel}).exec();
         res.send(results)
     } catch (error) {
         console.log(error.message);
@@ -24,7 +24,7 @@ findAppointmentById:async(req,res,next)=>{
     console.log(id)
 
     try {
-    const appointment =await Appintment.findById(id).exec();
+    const appointment =await Appintment.find({_id:id}).populate({path:'Doctor',model:DoctorModel}).populate({path:'Patient',model:PatientModel}).exec();
     //const doctor =await Product.find({_id:id})
    if(!appointment){
 throw createError(404,"Product does not exist")

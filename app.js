@@ -1,4 +1,4 @@
-
+require('./Database/intialDataBaseConnection')();
 const express =require ('express');
 const ProductRoute =require('./route/Doctor.route');
 const ReviewRoute=require('./route/Review.route');
@@ -12,7 +12,7 @@ const dotenv =require('dotenv').config();
 
 
 //Initialize DB
-require('./Database/intialDataBaseConnection')();
+
 //require('./Database/PatientDataBase')();
 
 
