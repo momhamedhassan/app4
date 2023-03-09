@@ -1,26 +1,25 @@
-GET https://test-third-baseline.onrender.com/Doctors
-
-###
-GET  http://localhost:3005/Appointments
-###
-POST http://localhost:3005/Patients
+PATCH  http://localhost:3005/Appointments/640a1ddbd757b8bf9c4cec9e
 Content-Type: application/json
+
 {
-    "doctorName":"abdalla Alaa",
-    "doctorSpeciality":"Dermatologist"
+    "Doctor":"63f02268a914e3b7cb80929b"
 }
 
+###
+GET http://localhost:3005/Appointments
 
 ### create product
 POST http://localhost:3005/Appointments
 Content-Type: application/json
 
 {
-    "PatientId":"abdal",
-    "DoctorId":"464664",
-    "AppointmentDate":"mohamed",
-    "AppointmentTime":"mohamed",
-    "PateintRequest":"mohamed"
+   
+    "AppointmentDate": "Diaa",
+    "AppointmentTime": "Hosney",
+    "PateintRequest": "Hosney",
+     "Doctor":"63f00000760946737c1b3856",
+     "Patient":"64088ea123d4dfc194e82dfb"
+    
 
 
 }
@@ -28,7 +27,7 @@ Content-Type: application/json
 
 
 ### get a product by id
-GET http://localhost:3000/products/639d772f173208c701af9e6c
+GET http://localhost:3005/Appointments
 
 ### update a product by id
 PATCH  http://localhost:4000/products/63997efc6b22caf957d21e5
