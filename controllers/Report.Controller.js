@@ -1,19 +1,20 @@
 const createError =require('http-errors');
 const { default: mongoose } = require('mongoose');
-const Appintment =require('../Models/Appointment.Model');
-const DoctorModel=require('../Models/Doctor.Model')
-const PatientModel=require('../Models/Patient.Model')
+const Doctor =require('../Models/Doctor.Model');
+const Appointment=require('../Models/Appointment.Model');
+const Report=require('../Models/Report.Model');
+const Prescribtion=require('../Models/Prescribtion.Model');
 
 module.exports=
 {
-getAllAppointments:async (req,res,next)=>{
+getAllReports:async (req,res,next)=>{
     //next(new Error("cannont geta list of all products"))
     //res.send("getting a list of all products");
 
     try {
         //const results = await Product.find({},{__v:0})
-        const results = await Appintment.find({},{})
-        .exec();
+        const results = await Report.find({},{})
+        
         res.send(results)
     } catch (error) {
         console.log(error.message);
@@ -21,21 +22,25 @@ getAllAppointments:async (req,res,next)=>{
 
 
 },
-findAppointmentById:async(req,res,next)=>{
+findReportById:async(req,res,next)=>{
     const id =req.params.id;
     console.log(id)
 
     try {
-    const appointment =await Appintment.find({_id:id})
+    const report =await Report.findById(id)
+    .populate({
+        path:'Prescribtion',
+        model:Prescribtion,
+        select:{__v:0}
+    })
     .exec();
-    console.log(appointment)
     //const doctor =await Product.find({_id:id})
-   if(!appointment){
-throw createError(404,"Product does not exist")
+   if(!report){
+throw createError(404,"Product does not exist")    
 
    }
   
-    res.send(appointment)
+    res.send(report)
 } catch (error) {
     console.log(error.message);
     if(error instanceof mongoose.CastError){
@@ -48,7 +53,7 @@ throw createError(404,"Product does not exist")
 
 
 } ,
-PostAppointment:async (req,res,next)=>{
+PostReport:async (req,res,next)=>{
 
     try { 
         //const product=new Doctor(req.body);
@@ -57,9 +62,9 @@ PostAppointment:async (req,res,next)=>{
         // res.send(result);
         // console.log(result);
         // console.log(req.body);
-        const appointment= await Appintment.create(req.body);
-        console.log(appointment)
-        res.send(appointment)
+        const report= await Report.create(req.body);
+        console.log(report)
+        res.send(report)
         
     } catch (error) {
         console.log(error.message)
@@ -69,8 +74,6 @@ PostAppointment:async (req,res,next)=>{
         }
         next(error);
     }
-  
-
     // const product = new Product({
 
     //     name :req.body.name,
@@ -85,11 +88,11 @@ PostAppointment:async (req,res,next)=>{
     
 
 },
-DeleteAppointment:async(req,res,next)=>{
+DeleteReport:async(req,res,next)=>{
     const id =req.params.id
     
     try {
-        const result =await Appintment.findByIdAndDelete(id)
+        const result =await Report.findByIdAndDelete(id)
         if(!result){
             throw createError(404,"Product does not exist")
             
@@ -107,7 +110,7 @@ DeleteAppointment:async(req,res,next)=>{
     }
     
 } ,
-UpdateAppointmentById:async(req,res,next)=>{
+UpdateReportById:async(req,res,next)=>{
 
 
     const id = req.params.id;
@@ -116,9 +119,7 @@ UpdateAppointmentById:async(req,res,next)=>{
         // res.send("updating a single product")
           try 
           {
-           
-            const result =await Appintment.findByIdAndUpdate(id,updates, options);
-        
+            const result =await Report.findByIdAndUpdate(id,updates, options);
             if(!result){throw createError(404,"Product does not exist ")}
             res.send(result)
           } 

@@ -1,6 +1,9 @@
 const createError =require('http-errors');
 const { default: mongoose } = require('mongoose');
 const Doctor =require('../Models/Doctor.Model');
+const ArticlesModel=require('../Models/Article/Article')
+const Appointment=require('../Models/Appointment.Model');
+const Patient = require('../Models/Patient.Model');
 
 module.exports=
 {
@@ -11,6 +14,7 @@ getAllDoctors:async (req,res,next)=>{
     try {
         //const results = await Product.find({},{__v:0})
         const results = await Doctor.find({},{})
+        .exec();
         
         res.send(results)
     } catch (error) {
@@ -21,10 +25,40 @@ getAllDoctors:async (req,res,next)=>{
 },
 findDoctorById:async(req,res,next)=>{
     const id =req.params.id;
-    console.log(id)
+   
 
     try {
-    const doctor =await Doctor.findById(id).exec();
+    const doctor =await Doctor.findById(id)
+    .exec();
+    
+    const j =doctor.Appointments;
+    
+    
+   const patientsOfThisMonth=[];
+    j.forEach((element) => {
+    var date =new Date();
+    const appointmentDate=element.AppointmentDate
+    const f=new Date(appointmentDate);
+    function isEqual(x,y){
+        if(x==y){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    if(isEqual(f.getMonth(),date.getMonth())){
+        console.log('done')
+        const r={"_id":element._id};
+
+        doctor.patientsOfThisMonth.push(r)
+   }
+    console.log(f)
+  
+    
+});
+
     //const doctor =await Product.find({_id:id})
    if(!doctor){
 throw createError(404,"Product does not exist")

@@ -1,6 +1,8 @@
 const mongoose=require('mongoose');
 const Schema = mongoose.Schema;
+const ObjectId =mongoose.Types.ObjectId;
 const DoctorSchema =new Schema({
+
 doctorName:{
 type:String,
 required:true
@@ -9,7 +11,7 @@ required:true
 doctorSpeciality:{
     type:String,required :true
 },
-rating:{
+Rank:{
     type:String
 },
 location:{
@@ -24,6 +26,15 @@ about_doctor:{
  doctorImgUrl:{
 type:String
 },
+patientsOfThisMonth:[{
+    type:ObjectId,
+    ref:'PatientOfThisMonth'
+}],
+savedArticles:[{
+    type:ObjectId,
+    ref:'SavedArticles'
+}]
+
 
 });
 

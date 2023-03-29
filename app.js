@@ -5,6 +5,11 @@ const ReviewRoute=require('./route/Review.route');
 const ExperienceRoute=require('./route/DoctorExperience');
 const PatientRoute=require('./route/Patient.route')
 const AppointmentRoute=require('./route/Appointments.route')
+const ArticleRoute=require('./route/Article.route');
+const ArticleCommunicationRoute=require('./route/Articlecommuication.route')
+const PrescribtionRoute=require('./route/Prescribtion.route')
+const ReportRoute=require('./route/Report.route')
+const DoctorHomePageRouter=require('./route/DoctorHomePage.route')
 const app =express();
 const createError=require('http-errors');
 app.use(express.json());
@@ -28,6 +33,12 @@ app.use('/Reviews',ReviewRoute);
 app.use('/DoctorExperience',ExperienceRoute);
 app.use('/Patients',PatientRoute)
 app.use('/Appointments',AppointmentRoute);
+app.use('/Articles',ArticleRoute);
+app.use('/ArticleCommunication',ArticleCommunicationRoute);
+app.use('/Prescribtion',PrescribtionRoute);
+app.use('/Report',ReportRoute);
+app.use('/DoctorHomePage',DoctorHomePageRouter);
+
 
 app.use((req,res,next)=>{
     next(createError(404,"Not found"))

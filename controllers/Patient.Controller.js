@@ -1,6 +1,8 @@
 const createError =require('http-errors');
 const { default: mongoose } = require('mongoose');
 const Patient =require('../Models/Patient.Model');
+const Appointment=require('../Models/Appointment.Model');
+const DoctorModel=require('../Models/Doctor.Model')
 
 module.exports=
 {
@@ -108,7 +110,14 @@ module.exports=
         console.log(id)
     
         try {
-        const patient =await Patient.findById(id).exec();
+        const patient =await Patient.findById(id)
+        .populate(
+            {path:'Appointments',
+            model:Appointment,
+            select:{Patient:0,__v:0}
+        }).exec();
+
+        
         //const doctor =await Product.find({_id:id})
        if(!patient){
     throw createError(404,"Product does not exist")

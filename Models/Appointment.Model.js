@@ -2,9 +2,7 @@ const mongoose= require('mongoose')
 const Schema=mongoose.Schema;
 const ObjectId =mongoose.Types.ObjectId;
 const AppointmentSchema = new Schema({
-    PatientId:{
-        type:String
-    },
+   
     Patient:{
         type:ObjectId,ref:'Patient'
     }
@@ -13,7 +11,7 @@ const AppointmentSchema = new Schema({
         type:ObjectId,ref:'Doctor'
     },
     AppointmentDate:{
-        type:String
+        type:Date
     },
     AppointmentTime:{ 
         type:String
@@ -25,5 +23,7 @@ const AppointmentSchema = new Schema({
 
 const myDB =mongoose.connection.useDb('Appointments');
 const appointment=myDB.model('appointment',AppointmentSchema);
+
+
 
 module.exports=appointment;

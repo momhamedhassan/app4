@@ -1,13 +1,31 @@
-PATCH  http://localhost:3005/Appointments/640a1ddbd757b8bf9c4cec9e
+POST   http://localhost:3005/Doctors
 Content-Type: application/json
 
 {
-    "Doctor":"63f02268a914e3b7cb80929b"
+    "Doctor":"63f96cfc48002698bbe28d09",
+    "Content":"mohamed",
+    "Date":"hassan",
+    "ArticleCommunication":"640d2dc3db8801119385c01a"
+
 }
-
 ###
-GET http://localhost:3005/Appointments
+GET  http://localhost:3005/Doctors
+###
+GET  http://localhost:3005/ArticleCommunication
+Content-Type: application/json
 
+{
+    "Likes":["63f96cfc48002698bbe28d09"],
+    "Comments":[
+        {"Doctor":"63f96cfc48002698bbe28d09",
+         "Content":"mohamed",
+         "Time":"hassan"
+        }
+    ]
+
+}
+###
+GET  http://localhost:3005/ArticleCommunication
 ### create product
 POST http://localhost:3005/Appointments
 Content-Type: application/json
@@ -27,7 +45,7 @@ Content-Type: application/json
 
 
 ### get a product by id
-GET http://localhost:3005/Appointments
+GET http://localhost:3005/Doctors
 
 ### update a product by id
 PATCH  http://localhost:4000/products/63997efc6b22caf957d21e5
