@@ -6,8 +6,9 @@ const ArticleCommunocation=require('../../Models/Article/ArticleCommunocation')
 module.exports=
 {
     getAllArticleCommunication:async(req,res,next)=>{
+        const id =req.params.id
         try{
-            const results=await ArticleCommunocation.find({},{})
+            const results=await ArticleCommunocation.find({_id:id},{})
             .populate(
             {path:'Comments.Doctor',
             model:DoctorModel,
