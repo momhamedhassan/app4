@@ -1,4 +1,4 @@
-POST   http://localhost:3005/Doctors
+get   http://localhost:3005/Doctors
 Content-Type: application/json
 
 {
@@ -9,9 +9,9 @@ Content-Type: application/json
 
 }
 ###
-GET  http://localhost:3005/Doctors
+GET  http://localhost:3005/DoctorHomePage/63f96cfc48002698bbe28d09
 ###
-GET  http://localhost:3005/ArticleCommunication
+GET  http://localhost:3005/ArticleCommunication/640d2dc3db8801119385c01a
 Content-Type: application/json
 
 {
