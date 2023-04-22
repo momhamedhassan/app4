@@ -5,7 +5,45 @@ const Article = require('../../Models/Article/Article');
 const ArticleCommunocation=require('../../Models/Article/ArticleCommunocation')
 module.exports=
 {
-    getAllArticleCommunication:async(req,res,next)=>{
+    patchArticleLikes:async(req,res,next)=>{
+        const id = req.params.id;
+        const updates=req.body;
+        const options={new :true}
+            // res.send("updating a single product")
+              try 
+              {
+                // console.log(updates.Comments)
+                const addComment =await ArticleCommunocation.findOneAndUpdate(
+                {_id:id}, 
+                { $addToSet: {Likes:updates.Likes},},
+                )
+                // const result=await ArticleCommunocation.findById()
+                const result=await ArticleCommunocation.findById({_id:id});
+
+             
+               
+                // const result =await ArticleCommunocation.findByIdAndUpdate(id,updates, options);
+                // console.log(updates)
+                // console.log(typeof(updates))
+                // console.log(id)
+                // console.log(typeof(id))
+                // console.log(req.params)
+                // console.log(req.body)
+            
+                if(!result){throw createError(404,"Product does not exist ")}
+                res.send(result)
+              } 
+                 
+              catch (error) 
+              {
+                console.log(error.message)
+                if (error instanceof mongoose.CastError)
+                {return next(createError(400,"Invalid Product Id"))}
+                next(error)
+              }  
+
+    },
+    getAllArticleCommunicationById:async(req,res,next)=>{
         const id =req.params.id
         try{
             const results=await ArticleCommunocation.find({_id:id},{})
@@ -18,10 +56,22 @@ module.exports=
         }catch(error){
             console.log(error.message);
         }
-    },
-    postArticleCommunication:async(req,res,next)=>{
-    
+    },getAllArticleCommunication:async(req,res,next)=>{
+      
         try{
+            const results=await ArticleCommunocation.find({},{})
+            .exec();
+            res.send(results)
+        }catch(error){
+            console.log(error.message);
+        }}
+    
+    ,
+    postArticleCommunication:async(req,res,next)=>{
+        try{
+            console.log(typeof(req.body))
+            var item={}
+            console.log(typeof(item))
             const article= await ArticleCommunocation.create(req.body);
             console.log(article)
             res.send(article)
@@ -61,6 +111,45 @@ module.exports=
             next(error);
         }
         
+    },
+    UpdateArticleById:async(req,res,next)=>{
+
+
+        const id = req.params.id;
+        const updates=req.body;
+        const options={new :true}
+            // res.send("updating a single product")
+              try 
+              {
+                // console.log(updates.Comments)
+                const addComment =await ArticleCommunocation.findOneAndUpdate(
+                {_id:id}, 
+                { $addToSet: {Comments:updates.Comments},},
+                )
+                // const result=await ArticleCommunocation.findById()
+                const result=await ArticleCommunocation.findById({_id:id});
+
+             
+               
+                // const result =await ArticleCommunocation.findByIdAndUpdate(id,updates, options);
+                // console.log(updates)
+                // console.log(typeof(updates))
+                // console.log(id)
+                // console.log(typeof(id))
+                // console.log(req.params)
+                // console.log(req.body)
+            
+                if(!result){throw createError(404,"Product does not exist ")}
+                res.send(result)
+              } 
+                 
+              catch (error) 
+              {
+                console.log(error.message)
+                if (error instanceof mongoose.CastError)
+                {return next(createError(400,"Invalid Product Id"))}
+                next(error)
+              }  
     }
 
 }

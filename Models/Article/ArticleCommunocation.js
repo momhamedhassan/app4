@@ -3,7 +3,11 @@ const Schema = mongoose.Schema;
 const ObjectId =mongoose.Types.ObjectId;
 const ArticleCommunicationSchema =new Schema
 ({
-    Likes:[{type:ObjectId,ref:'Doctor' }],
+    ArticleId:{
+        type:ObjectId,
+        ref:'Article'
+    },
+    Likes:[{DoctorId:{type:ObjectId,ref:'Doctor' }}],
     
     Comments:[
         {

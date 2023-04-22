@@ -11,18 +11,13 @@ Content-Type: application/json
 ###
 GET  http://localhost:3005/DoctorHomePage/63f96cfc48002698bbe28d09
 ###
-GET  http://localhost:3005/ArticleCommunication/640d2dc3db8801119385c01a
+post  http://localhost:3005/Articles
 Content-Type: application/json
-
 {
-    "Likes":["63f96cfc48002698bbe28d09"],
-    "Comments":[
-        {"Doctor":"63f96cfc48002698bbe28d09",
-         "Content":"mohamed",
-         "Time":"hassan"
-        }
-    ]
-
+   "Doctor":"63f96cfc48002698bbe28d09",
+   "Content":"mohamed",
+   "Date":"moahmed",
+   "ArticleTitle":"mohamed"
 }
 ###
 GET  http://localhost:3005/ArticleCommunication
