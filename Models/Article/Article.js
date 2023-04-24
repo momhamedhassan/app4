@@ -19,7 +19,8 @@ ArticleTitle:{
 ArticleCommunication:{
     type:ObjectId,
     ref:'ArticleCommunication'
-}
+},
+
 });
 const myDB =mongoose.connection.useDb('Articles');
 const Article =myDB.model('Article',ArticleSchema);

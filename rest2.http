@@ -1,0 +1,36 @@
+
+### get Articles
+Get https://test-third-baseline.onrender.com/Articles
+
+
+### get home page by Doctor id
+GET https://test-third-baseline.onrender.com/DoctorHomePage/64448d207c658dbddf7d4f2e
+
+
+### get Article communication by id
+Get https://test-third-baseline.onrender.com/ArticleCommunication/articlecommunication/64446cd18afd65fdcf415ff4
+
+### post article
+Post https://test-third-baseline.onrender.com/Articles
+Content-Type: application/json
+
+{
+   "Doctor":"63f96e9ba5312120267b9760",
+   "Content":"hosney",
+   "Date":"hosney",
+   "ArticleTitle":"hosney"
+}
+### add comment
+PATCH  https://test-third-baseline.onrender.com/ArticleCommunication/patchCommunicationComments/64446570332b391322ac06e3
+Content-Type: application/json
+
+{
+    "Comments":[{"Doctor":"63f96da5eec1af9d1c7f2566"}]
+}
+### add likes
+PATCH  https://test-third-baseline.onrender.com/ArticleCommunication/patchCommunicationLikes/64446570332b391322ac06e3
+Content-Type: application/json
+
+{
+"Likes":[{"DoctorId":"63f96da5eec1af9d1c7f9999"}]
+}
