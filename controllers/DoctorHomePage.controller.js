@@ -14,6 +14,11 @@ module.exports=
         const appointments=await Appointment.find({Doctor:id},{Doctor:0})
         .exec();
         const articles=await Article.find({})
+        .populate(
+            {path:'Doctor',
+            model:Doctor,
+            select:{__v:0,Rank:0,location:0,experience_years:0,about_doctor:0,patientsOfThisMonth:0,savedArticles:0,rating:0}
+        })
         .exec();
 
        appointments.forEach((element) => {
