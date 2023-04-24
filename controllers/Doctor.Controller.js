@@ -31,33 +31,33 @@ findDoctorById:async(req,res,next)=>{
     const doctor =await Doctor.findById(id)
     .exec();
     
-    const j =doctor.Appointments;
+    //const j =doctor.Appointments;
     
     
-   const patientsOfThisMonth=[];
-    j.forEach((element) => {
-    var date =new Date();
-    const appointmentDate=element.AppointmentDate
-    const f=new Date(appointmentDate);
-    function isEqual(x,y){
-        if(x==y){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+//    const patientsOfThisMonth=[];
+//     j.forEach((element) => {
+//     var date =new Date();
+//     const appointmentDate=element.AppointmentDate
+//     const f=new Date(appointmentDate);
+//     function isEqual(x,y){
+//         if(x==y){
+//             return true;
+//         }
+//         else{
+//             return false;
+//         }
+//     }
 
-    if(isEqual(f.getMonth(),date.getMonth())){
-        console.log('done')
-        const r={"_id":element._id};
+//     if(isEqual(f.getMonth(),date.getMonth())){
+//         console.log('done')
+//         const r={"_id":element._id};
 
-        doctor.patientsOfThisMonth.push(r)
-   }
-    console.log(f)
+//         doctor.patientsOfThisMonth.push(r)
+//    }
+//     console.log(f)
   
     
-});
+// });
 
     //const doctor =await Product.find({_id:id})
    if(!doctor){
