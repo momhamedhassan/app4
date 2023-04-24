@@ -4,11 +4,11 @@ Get https://test-third-baseline.onrender.com/Articles
 
 
 ### get home page by Doctor id
-GET https://test-third-baseline.onrender.com/DoctorHomePage/64448d207c658dbddf7d4f2e
+GET http://localhost:3005/DoctorHomePage/64448d207c658dbddf7d4f2e
 
 
 ### get Article communication by id
-Get https://test-third-baseline.onrender.com/ArticleCommunication/articlecommunication/64446cd18afd65fdcf415ff4
+Get https://test-third-baseline.onrender.com/ArticleCommunication/articlecommunication/644471538afd65fdcf4160c6
 
 ### post article
 Post https://test-third-baseline.onrender.com/Articles
