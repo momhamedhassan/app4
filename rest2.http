@@ -8,7 +8,7 @@ GET http://localhost:3005/DoctorHomePage/644720ec6b72f3ad6db85f19
 
 
 ### get Article communication by id
-Get https://test-third-baseline.onrender.com/ArticleCommunication/articlecommunication/644722056b72f3ad6db85f24
+DELETE  http://localhost:3005/ArticleCommunication/patchCommunicationComments/deleteComment/644722056b72f3ad6db85f24/6448ec8371465cf789552ebd
 
 ### post article
 Post https://test-third-baseline.onrender.com/Articles

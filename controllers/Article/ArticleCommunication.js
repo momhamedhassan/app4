@@ -113,9 +113,7 @@ module.exports=
         }
         
     },
-    UpdateArticleById:async(req,res,next)=>{
-
-
+    AddComment:async(req,res,next)=>{
         const id = req.params.id;
         const updates=req.body;
         const options={new :true}
@@ -126,20 +124,58 @@ module.exports=
                 const addComment =await ArticleCommunocation.findOneAndUpdate(
                 {_id:id}, 
                 { $addToSet: {Comments:updates.Comments},},
-                )
-                // const result=await ArticleCommunocation.findById()
+                );
                 const result=await ArticleCommunocation.findById({_id:id});
-
-             
-               
-                // const result =await ArticleCommunocation.findByIdAndUpdate(id,updates, options);
-                // console.log(updates)
-                // console.log(typeof(updates))
-                // console.log(id)
-                // console.log(typeof(id))
-                // console.log(req.params)
-                // console.log(req.body)
-            
+                if(!result){throw createError(404,"Product does not exist ")}
+                res.send(result)
+              } 
+                 
+              catch (error) 
+              {
+                console.log(error.message)
+                if (error instanceof mongoose.CastError)
+                {return next(createError(400,"Invalid Product Id"))}
+                next(error)
+              }  
+    },deleteComment:async(req,res,next)=>{
+        const articleCommunicationId = req.params.ArticleCommunicatioId;
+        const commentId=req.params.CommentId;
+        const options={new :true}
+            // res.send("updating a single product")
+              try 
+              {
+                // console.log(updates.Comments)
+                const addComment =await ArticleCommunocation.findOneAndUpdate(
+                {_id:articleCommunicationId}, 
+                { $pull: {Comments:{_id:commentId}},},
+                );
+                const result=await ArticleCommunocation.findById({_id:articleCommunicationId});
+                if(!result){throw createError(404,"Product does not exist ")}
+                res.send(result)
+              } 
+                 
+              catch (error) 
+              {
+                console.log(error.message)
+                if (error instanceof mongoose.CastError)
+                {return next(createError(400,"Invalid Product Id"))}
+                next(error)
+              }  
+    }
+    ,Dislike:async(req,res,next)=>{
+        // not Done
+        const articleCommunicationId = req.params.ArticleCommunicatioId;
+        const commentId=req.params.CommentId;
+        const options={new :true}
+            // res.send("updating a single product")
+              try 
+              {
+                // console.log(updates.Comments)
+                const addComment =await ArticleCommunocation.findOneAndUpdate(
+                {_id:articleCommunicationId}, 
+                { $pull: {Likes:{_id:commentId}},},
+                );
+                const result=await ArticleCommunocation.findById({_id:articleCommunicationId});
                 if(!result){throw createError(404,"Product does not exist ")}
                 res.send(result)
               } 

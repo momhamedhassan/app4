@@ -111,11 +111,7 @@ module.exports=
     
         try {
         const patient =await Patient.findById(id)
-        .populate(
-            {path:'Appointments',
-            model:Appointment,
-            select:{Patient:0,__v:0}
-        }).exec();
+        .exec();
 
         
         //const doctor =await Product.find({_id:id})
