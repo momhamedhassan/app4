@@ -4,7 +4,7 @@ Get https://test-third-baseline.onrender.com/Articles
 
 
 ### get home page by Doctor id
-GET http://localhost:3005/DoctorHomePage/64448d207c658dbddf7d4f2e
+GET http://localhost:3005/DoctorHomePage/644720ec6b72f3ad6db85f19
 
 
 ### get Article communication by id

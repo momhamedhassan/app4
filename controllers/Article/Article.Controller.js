@@ -13,11 +13,7 @@ module.exports=
             model:DoctorModel,
             select:{__v:0}
             })
-            .populate({
-                path:'ArticleCommunication',
-                model:ArticleCommunication,
-                select:{__v:0}
-            })
+           
             .exec();
             res.send(results)
         }catch(error){
