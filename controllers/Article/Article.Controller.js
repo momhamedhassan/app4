@@ -70,13 +70,13 @@ module.exports=
         const id =req.params.id;
         console.log(id)
         try {
-            const results=await Article.find({Doctor:id})
-            .populate({
-                path:'ArticleCommunication',
-                model:ArticleCommunication,
-                select:{__v:0}
-            })
-            .exec();
+            const results=await Article.find({Doctor:id}).exec();
+            // .populate({
+            //     path:'ArticleCommunication',
+            //     model:ArticleCommunication,
+            //     select:{__v:0}
+            // })
+            
             if(!results){
                 throw createError(404,"Product does not exist")
                    }
