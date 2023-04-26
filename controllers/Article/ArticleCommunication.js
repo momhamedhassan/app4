@@ -46,7 +46,7 @@ module.exports=
     getAllArticleCommunicationById:async(req,res,next)=>{
         const id =req.params.id
         try{
-            const results=await ArticleCommunocation.find({_id:id},{})
+            const results=await ArticleCommunocation.findById({_id:id},{})
             .populate(
             {path:'Comments.Doctor',
             model:DoctorModel,
@@ -56,7 +56,8 @@ module.exports=
         }catch(error){
             console.log(error.message);
         }
-    },getAllArticleCommunication:async(req,res,next)=>{
+    },
+    getAllArticleCommunication:async(req,res,next)=>{
       
         try{
             const results=await ArticleCommunocation.find({},{})
