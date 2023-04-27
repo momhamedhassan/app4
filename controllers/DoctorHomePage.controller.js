@@ -3,6 +3,7 @@ const { default: mongoose } = require('mongoose');
 const Doctor=require('../Models/Doctor.Model');
 const Appointment=require('../Models/Appointment.Model');
 const Article = require('../Models/Article/Article');
+const Patient=require('../Models/Patient.Model');
 
 module.exports=
 {
@@ -12,6 +13,11 @@ module.exports=
         const doctor =await Doctor.findById(id)
         .exec();
         const appointments=await Appointment.find({Doctor:id},{Doctor:0})
+        .populate(
+            {path:'Patient',
+            model:Patient,
+            select:{__v:0}
+        })
         .exec();
         const articles=await Article.find({})
         .populate(
