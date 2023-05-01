@@ -20,6 +20,9 @@ ArticleCommunication:{
     type:ObjectId,
     ref:'ArticleCommunication'
 },
+ArticleField:{
+    type:String
+}
 
 });
 const myDB =mongoose.connection.useDb('Articles');

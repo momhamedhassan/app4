@@ -6,6 +6,7 @@ router.get  ('/',ArticleController.getAllArticles);
 router.get('/:id',ArticleController.getArticleByID);
 router.post ('/',ArticleController.postArticle);
 router.patch('/:id',ArticleController.UpdateArticleById)
+router.delete('/:id',ArticleController.deleteArticleById);
 
 
 module.exports = router;

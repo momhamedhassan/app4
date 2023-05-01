@@ -11,8 +11,9 @@ Content-Type: application/json
 ###
 GET  http://localhost:3005/DoctorHomePage/63f96cfc48002698bbe28d09
 ###
-post  http://localhost:3005/Articles
+DELETE   http://localhost:3005/Articles/644f215d825fb9a8e9505dd2
 Content-Type: application/json
+
 {
    "Doctor":"63f96cfc48002698bbe28d09",
    "Content":"mohamed",
@@ -20,7 +21,7 @@ Content-Type: application/json
    "ArticleTitle":"mohamed"
 }
 ###
-GET  http://localhost:3005/ArticleCommunication
+GET  http://localhost:3005/Articles
 ### create product
 POST http://localhost:3005/Appointments
 Content-Type: application/json
