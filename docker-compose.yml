@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+#mongodb services
+  mongo_db:
+    container_name:
+      db_container
+    image: 
+      mongo:latest  
+    restart: always
+    ports:
+      - 2717:27017
+    volumes:
+      - mongo_db:/data/db
+
+  api:
+    build: .
+    ports:
+      - 3005:3005
+    volumes:
+      - .:/usr/src/app
+    environment:
+      PORT: 3005
+      MONGODB_URI: mongodb+srv://cluster0.bshgjjp.mongodb.net/?retryWrites=true&w=majority
+      DB_NAME: RestApi
+      DB_USER: mohamed
+      DB_PASS: mohamed
+    depends_on:
+      - mongo_db
+
+volumes:
+  mongo_db: {}

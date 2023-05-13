@@ -21,7 +21,7 @@ Content-Type: application/json
    "ArticleTitle":"mohamed"
 }
 ###
-GET  http://localhost:3005/Articles
+GET  http://localhost:3005/Articles/ HTTP/1.1
 ### create product
 POST http://localhost:3005/Appointments
 Content-Type: application/json

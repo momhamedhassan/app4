@@ -12,9 +12,7 @@ Activity:{type:String},
 
 DateOfUpCommingAppointment:{type:String},
 
-PreviousAppointments:{type:ObjectId,ref:'PreviousAppointment'}
-
-
+PreviousAppointments:[{type:ObjectId,ref:'PreviousAppointment'}]
 
 });
 
