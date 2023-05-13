@@ -10,6 +10,8 @@ const ArticleCommunicationRoute=require('./route/Articlecommuication.route')
 const PrescribtionRoute=require('./route/Prescribtion.route')
 const ReportRoute=require('./route/Report.route')
 const DoctorHomePageRouter=require('./route/DoctorHomePage.route')
+const PateintSchaduleRouter=require('./route/PatientSchadule.route')
+const PatientHomePageRouter=require('./route/PatientHomePage.route');
 const app =express();
 const createError=require('http-errors');
 app.use(express.json());
@@ -38,8 +40,8 @@ app.use('/ArticleCommunication',ArticleCommunicationRoute);
 app.use('/Prescribtion',PrescribtionRoute);
 app.use('/Report',ReportRoute);
 app.use('/DoctorHomePage',DoctorHomePageRouter);
-
-
+app.use('/patientSchadule',PateintSchaduleRouter);
+app.use('/PatientHomePage',PatientHomePageRouter);
 app.use((req,res,next)=>{
     next(createError(404,"Not found"))
 }
