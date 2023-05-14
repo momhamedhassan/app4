@@ -18,6 +18,9 @@ const AppointmentSchema = new Schema({
     },
     PateintRequest:{
         type:String
+    },
+    duration:{
+        type:String
     }
 });
 

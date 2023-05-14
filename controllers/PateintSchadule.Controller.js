@@ -1,14 +1,29 @@
 const createError =require('http-errors');
 const { default: mongoose } = require('mongoose');
+const DoctorModel=require('../Models/Doctor.Model')
 const PatientSchaduleModel =require('../Models/SchadulePage/Schadule.Model');
+const Schadule = require('../Models/SchadulePage/Schadule.Model');
 
 module.exports=
 {
-    getSchaduleById:async (req,res,next)=>{
+  //Schadule 
+getSchaduleById:async (req,res,next)=>{
     const id =req.params.id;
 
     try {
     const result =await PatientSchaduleModel.find({PatientId:id})
+    .populate(
+      {
+          path:"Appointment",
+          model:Appointment,
+          populate:{
+              path:"Doctor",
+              model:DoctorModel,
+              select:{__v:0,patientsOfThisMonth:0,savedArticles:0}
+          },
+          select:{__v:0}
+      })
+    .exec();
     if(!result){
     throw createError(404,"Product does not exist")
     }
@@ -22,7 +37,8 @@ module.exports=
     next(error);
 
 }
-}, PostSchadule:async (req,res,next)=>{
+}, 
+PostSchadule:async (req,res,next)=>{
 
     try { 
         const product= await PatientSchaduleModel.create(req.body);
@@ -36,33 +52,6 @@ module.exports=
         }
         next(error);
     }
-},PatchSchadulePills:async(req,res,next)=>{
-    const id = req.params.id;
-    const updates=req.body;
-    const options={new :true}
-          try 
-          {
-            const addPill =await PatientSchaduleModel.findOneAndUpdate(
-            {_id:id}, 
-            { $addToSet:
-                {
-                    Pills:updates.Pills
-                },
-            },
-            )
-            const result=await PatientSchaduleModel.findById({_id:id});
-            if(!result){throw createError(404,"Product does not exist ")}
-            res.send(result)
-          } 
-             
-          catch (error) 
-          {
-            console.log(error.message)
-            if (error instanceof mongoose.CastError)
-            {return next(createError(400,"Invalid Product Id"))}
-            next(error)
-          }  
-
 },
 getAllPatientScadule:async (req,res,next)=>{
     try {
@@ -75,7 +64,59 @@ getAllPatientScadule:async (req,res,next)=>{
     }
 
 
-},deletePill:async(req,res,next)=>{
+},
+deleteSchadule:async(req,res,next)=>{
+  const id =req.params.id
+            
+  try {
+      const result =await Schadule.findByIdAndDelete(id)
+      if(!result){
+          throw createError(404,"Schadule does not exist")
+          
+             }
+      console.log(result)
+      res.send(result)
+  } catch (error) {
+      console.log(error.message)
+      if(error instanceof mongoose.CastError){
+  
+          next(createError(400,"Invalid Scadule id"))
+          return;
+      }
+      next(error);
+  }
+},
+
+//Pills
+PatchSchadulePills:async(req,res,next)=>{
+  const id = req.params.id;
+  const updates=req.body;
+  const options={new :true}
+        try 
+        {
+          const addPill =await PatientSchaduleModel.findOneAndUpdate(
+          {_id:id}, 
+          { $addToSet:
+              {
+                  Pills:updates.Pills
+              },
+          },
+          )
+          const result=await PatientSchaduleModel.findById({_id:id});
+          if(!result){throw createError(404,"Product does not exist ")}
+          res.send(result)
+        } 
+           
+        catch (error) 
+        {
+          console.log(error.message)
+          if (error instanceof mongoose.CastError)
+          {return next(createError(400,"Invalid Product Id"))}
+          next(error)
+        }  
+
+},
+deletePill:async(req,res,next)=>{
     const SchaduleId = req.params.SchaduleId;
     const pillId=req.params.PillId;
     const options={new :true}
@@ -98,7 +139,10 @@ getAllPatientScadule:async (req,res,next)=>{
             {return next(createError(400,"Invalid Product Id"))}
             next(error)
           }  
-},PatchSchaduleActivities:async(req,res,next)=>{
+},
+
+//Activity
+PatchSchaduleActivities:async(req,res,next)=>{
     const id = req.params.id;
     const updates=req.body;
     const options={new :true}
@@ -124,14 +168,15 @@ getAllPatientScadule:async (req,res,next)=>{
             next(error)
           }  
 
-},deleteActivity:async(req,res,next)=>{
+},
+deleteActivity:async(req,res,next)=>{
     const SchaduleId = req.params.SchaduleId;
     const ActivityId=req.params.ActivityId;
     const options={new :true}
         
           try
           {
-            const deletePill =await PatientSchaduleModel.findOneAndUpdate(
+            const deleteActivity =await PatientSchaduleModel.findOneAndUpdate(
             {_id:SchaduleId}, 
             { $pull: {Activities:{_id:ActivityId}},},
             );
@@ -148,6 +193,57 @@ getAllPatientScadule:async (req,res,next)=>{
             next(error)
           }  
 },
+//Appointment
+addAppointment:async(req,res,next)=>{
+  const SchaduleId = req.params.SchaduleId;
+  const updates=req.body;
+  const options={new :true}
+        try 
+        {
+          const addAAppointment =await PatientSchaduleModel.findOneAndUpdate(
+          {_id:SchaduleId}, 
+          { $addToSet:
+              {
+                  Appointment:updates.Appointment
+              }
+          },
+          )
+          const result=await PatientSchaduleModel.findById({_id:SchaduleId});
+          if(!result){throw createError(404,"ِAppointment does not exist ")}
+          res.send(result)
+        }    
+        catch (error) 
+        {
+          console.log(error.message)
+          if (error instanceof mongoose.CastError)
+          {return next(createError(400,"Invalid ِAppointment Id"))}
+          next(error)
+        }  
 
+  },
+  deleteAppointment:async(req,res,next)=>{
+    const SchaduleId = req.params.SchaduleId;
+    const AppointmentId=req.params.appointmentId;
+    const options={new :true}
+        
+          try
+          {
+            const deleteActivity =await PatientSchaduleModel.findOneAndUpdate(
+            {_id:SchaduleId}, 
+            { $pull: {Appointment:{_id:AppointmentId}},},
+            );
+            const result=await PatientSchaduleModel.findById({_id:SchaduleId});
+            if(!result){throw createError(404,"Appointment does not exist ")}
+            res.send(result)
+          } 
+             
+          catch (error) 
+          {
+            console.log(error.message)
+            if (error instanceof mongoose.CastError)
+            {return next(createError(400,"Invalid Product Id"))}
+            next(error)
+          }  
+},
 
-  }
+}

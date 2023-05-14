@@ -123,19 +123,10 @@ module.exports=
             // res.send("updating a single product")
               try 
               {
-               
                 const result =await Article.findByIdAndUpdate(id,updates, options);
-                console.log(updates)
-                console.log(typeof(updates))
-                console.log(id)
-                console.log(typeof(id))
-                console.log(req.params)
-            
                 if(!result){throw createError(404,"Product does not exist ")}
                 res.send(result)
-              } 
-                 
-              catch (error) 
+              }catch (error) 
               {
                 console.log(error.message)
                 if (error instanceof mongoose.CastError)

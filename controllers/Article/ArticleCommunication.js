@@ -9,27 +9,13 @@ module.exports=
         const id = req.params.id;
         const updates=req.body;
         const options={new :true}
-            // res.send("updating a single product")
               try 
               {
-                // console.log(updates.Comments)
                 const addComment =await ArticleCommunocation.findOneAndUpdate(
                 {_id:id}, 
                 { $addToSet: {Likes:updates.Likes},},
                 )
-                // const result=await ArticleCommunocation.findById()
                 const result=await ArticleCommunocation.findById({_id:id});
-
-             
-               
-                // const result =await ArticleCommunocation.findByIdAndUpdate(id,updates, options);
-                // console.log(updates)
-                // console.log(typeof(updates))
-                // console.log(id)
-                // console.log(typeof(id))
-                // console.log(req.params)
-                // console.log(req.body)
-            
                 if(!result){throw createError(404,"Product does not exist ")}
                 res.send(result)
               } 

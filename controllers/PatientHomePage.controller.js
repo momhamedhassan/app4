@@ -10,9 +10,21 @@ module.exports=
 {getPatientHomePage:async(req,res,next)=>{
     const id =req.params.id;
     try{
-        const schadulePage=await SchadulePage.find({PatientId:id}).exec();
+        const schadulePage=await SchadulePage.find({PatientId:id})
+        .populate(
+            {
+                path:"Appointment",
+                model:Appointment,
+                populate:{
+                    path:"Doctor",
+                    model:DoctorModel,
+                    select:{__v:0,patientsOfThisMonth:0,savedArticles:0}
+                },
+                select:{__v:0}
+            })
+        .exec();
         const patient=await Patient.find({_id:id}).exec();
-        const articles=await Article.find({}).exec();
+        const articles=await Article.find().exec();
 
         const result={schadulePage,articles,pateint: patient};
         if(!result){

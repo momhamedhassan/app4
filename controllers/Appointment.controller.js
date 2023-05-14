@@ -13,6 +13,12 @@ getAllAppointments:async (req,res,next)=>{
     try {
         //const results = await Product.find({},{__v:0})
         const results = await Appintment.find({},{})
+        .populate(
+            {path:'Doctor',
+            model:DoctorModel,
+            select:{__v:0}
+        }
+        )
         .exec();
         res.send(results)
     } catch (error) {
