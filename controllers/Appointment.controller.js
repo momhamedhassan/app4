@@ -87,6 +87,8 @@ PostAppointment:async (req,res,next)=>{
                     Appointment:updates.Appointment
                 }
             },)
+            console.log(appointment)
+        res.send(appointment)
         
     } catch (error) {
         console.log(error.message)
