@@ -75,22 +75,27 @@ PostAppointment:async (req,res,next)=>{
         }
         next(error);
     }
-  
 
-    // const product = new Product({
-
-    //     name :req.body.name,
-    //     price:req.body.price
-    // })
-
-    // product
-    // .save()
-    // .then(result=>{console.log(result);res.send(result);})
-    // .catch(err=>{console.log(err.message)})
-   
-    
-
-},
+},PostPatientAppointment:async (req,res,next)=>{
+    const schaduleId=req.params.SchaduleId
+    try { 
+        const appointment= await Appintment.create(req.body);
+        const addAAppointment =await PatientSchaduleModel.findOneAndUpdate(
+            {_id:schaduleId}, 
+            { $addToSet:
+                {
+                    Appointment:updates.Appointment
+                }
+            },)
+        
+    } catch (error) {
+        console.log(error.message)
+        if(error.name === 'ValidationError'){
+            next(createError(422,error.message));
+            return;
+        }
+        next(error);
+    }},
 DeleteAppointment:async(req,res,next)=>{
     const id =req.params.id
     

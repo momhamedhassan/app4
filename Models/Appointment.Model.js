@@ -11,7 +11,7 @@ const AppointmentSchema = new Schema({
         type:ObjectId,ref:'Doctor'
     },
     AppointmentDate:{
-        type:Date
+        type:String
     },
     AppointmentTime:{ 
         type:String

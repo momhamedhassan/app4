@@ -9,6 +9,8 @@ router.get('/',AppointmentController.getAllAppointments);
 router.get('/:id',AppointmentController.findAppointmentById);
 //Post Product
 router.post('/',AppointmentController.PostAppointment);
+
+router.post('/addPatientAppointment/:SchaduleId',AppointmentController.PostPatientAppointment)
 //update Product
 router.patch('/:id',AppointmentController.UpdateAppointmentById);
 //delete product
