@@ -16,6 +16,10 @@ Content-Type: application/json
 GET http://localhost:3007/Appointments
 
 
+###Patient Home Page
+GET http://localhost:3007/PatientHomePage/6447230b6b72f3ad6db85f27
+
+
 ### get Article communication by id
 DELETE  http://localhost:3005/ArticleCommunication/patchCommunicationComments/deleteComment/644722056b72f3ad6db85f24/6448ec8371465cf789552ebd
 
