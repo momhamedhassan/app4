@@ -3,6 +3,7 @@ const { default: mongoose } = require('mongoose');
 const Appintment =require('../Models/Appointment.Model');
 const DoctorModel=require('../Models/Doctor.Model')
 const PatientModel=require('../Models/Patient.Model')
+const PatientSchaduleModel =require('../Models/SchadulePage/Schadule.Model');
 
 module.exports=
 {
@@ -78,9 +79,11 @@ PostAppointment:async (req,res,next)=>{
 
 },PostPatientAppointment:async (req,res,next)=>{
     const schaduleId=req.params.SchaduleId
+    const updates=req.body;
+    const options={new :true}
     try { 
         const appointment= await Appintment.create(req.body);
-        const addAAppointment =await PatientSchaduleModel.findOneAndUpdate(
+        const addAppointment =await PatientSchaduleModel.findOneAndUpdate(
             {_id:schaduleId}, 
             { $addToSet:
                 {
@@ -88,7 +91,7 @@ PostAppointment:async (req,res,next)=>{
                 }
             },)
             console.log(appointment)
-        res.send(appointment)
+        res.send(addAppointment)
         
     } catch (error) {
         console.log(error.message)
