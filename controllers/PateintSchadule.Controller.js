@@ -3,6 +3,7 @@ const { default: mongoose } = require('mongoose');
 const DoctorModel=require('../Models/Doctor.Model')
 const PatientSchaduleModel =require('../Models/SchadulePage/Schadule.Model');
 const Schadule = require('../Models/SchadulePage/Schadule.Model');
+const Appointment=require('../Models/Appointment.Model');
 
 module.exports=
 {
