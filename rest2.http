@@ -4,7 +4,12 @@ POST  http://localhost:3007/Appointments/addPatientAppointment/645d0c802b62fe8bd
 Content-Type: application/json
 
 {
-    "Appointment":["6462424ee08319727f9f849b"]
+    "Patient":"6447230b6b72f3ad6db85f27",
+    "Doctor":"644720ec6b72f3ad6db85f19",
+    "AppointmentDate":"Wed Mar 03 2021 02:00:00 GMT+0200 (Eastern European Standard Time)",
+    "AppointmentTime":"sunday",
+    "PateintRequest":"Trust issues",
+    "duration":"122"
 }
 
 ### get home page by Doctor id

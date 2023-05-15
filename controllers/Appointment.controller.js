@@ -82,16 +82,18 @@ PostAppointment:async (req,res,next)=>{
     const updates=req.body;
     const options={new :true}
     try { 
-        const appointment= await Appintment.create(req.body);
+        const appointment= await Appintment.create(updates);
+        console.log(appointment.id)
         const addAppointment =await PatientSchaduleModel.findOneAndUpdate(
             {_id:schaduleId}, 
             { $addToSet:
                 {
-                    Appointment:updates.Appointment
+                    Appointment:appointment.id
                 }
             },)
             console.log(appointment)
-        res.send(addAppointment)
+            const result=await PatientSchaduleModel.findById({_id:schaduleId});
+        res.send(result)
         
     } catch (error) {
         console.log(error.message)
