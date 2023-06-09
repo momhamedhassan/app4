@@ -53,6 +53,7 @@ app.use('/DoctorHomePage',DoctorHomePageRouter);
 app.use('/patientSchadule',PateintSchaduleRouter);
 app.use('/PatientHomePage',PatientHomePageRouter);
 
+app.get('/api/test',async(req,res,next)=>{res.json({code:0})})
 
 app.use('/api/articles',verifyAccessToken,NewArticleRoute);
 

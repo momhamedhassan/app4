@@ -186,3 +186,6 @@ GET http://localhost:3007/api/ArticleCommunication/articleLikes/64826177299036c5
 ### get doctor id by token
 GET http://localhost:3007/api/Doctors/getId/get
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYyNjExNTAsImV4cCI6MTY4NjMwNDM1MCwiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.VES-mI9BnpmqZsdczjVOk2hWo2MYG2CxgNLKIOmOKLs
+
+###
+GET http://localhost:3007/api/test
