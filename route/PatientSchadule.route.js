@@ -6,6 +6,7 @@ router.get('/',SchaduleController.getAllPatientScadule);
 router.get('/:id',SchaduleController.getSchaduleById);
 router.post('/',SchaduleController.PostSchadule);
 router.delete('/:id',SchaduleController.deleteSchadule);
+router.patch('/patchSchadule/:PatientId',SchaduleController.addSchadule);
 
  //patching Pills
  router.patch('/patchPills/:id',SchaduleController.PatchSchadulePills);

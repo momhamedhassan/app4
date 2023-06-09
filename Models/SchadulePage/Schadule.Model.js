@@ -12,8 +12,11 @@ const SchaduleSchema = new Schema({
     StartDate:{type:String},
     FinishDate:{type:String},
     PillTime:{String},
-    HowToUse:{type:String}}],
-   Activities:[{
+    HowToUse:{type:String}
+    }],
+
+  Activities:[
+    {
         image:{type:String},
         Name:{type:String},
         Time:{type:String}

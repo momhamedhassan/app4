@@ -3,16 +3,24 @@ const Schema = mongoose.Schema;
 const ObjectId =mongoose.Types.ObjectId;
 const PrescribtionSchema =new Schema
 ({
+PatientId:{type:ObjectId,ref:"Patient"},
+
+DoctorId:{type:ObjectId,ref:"Doctor"},
 
 Appointment:{type:ObjectId,ref:'Appointment'},
 
-Pills:{type:String},
+Pills:[
+    {
+type:ObjectId,ref:"Pill"
+    }],
 
-Activity:{type:String},
-
-DateOfUpCommingAppointment:{type:String},
-
-PreviousAppointments:[{type:ObjectId,ref:'PreviousAppointment'}]
+Activities:[
+    {
+        type:ObjectId,ref:"Activity"
+    }],
+NextAppointment:{
+    type:ObjectId,ref:'Appointment'
+}
 
 });
 

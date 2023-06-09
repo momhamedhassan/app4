@@ -3,15 +3,10 @@ const Schema = mongoose.Schema;
 const ObjectId =mongoose.Types.ObjectId;
 const ArticleCommunicationSchema =new Schema
 ({
-    ArticleId:{
-        type:ObjectId,
-        ref:'Article'
-    },
-    Likes:[{DoctorId:{type:ObjectId,ref:'Doctor' }}],
-    
-    Comments:[
-        {
-         Doctor:{type:ObjectId,ref:'Doctor'},
+    Likes:[{Doctor:{type:ObjectId,ref:'AgoraUser' }}],
+    Comments:
+        [{
+         Doctor:{type:ObjectId,ref:'AgoraUser'},
          Content:{type:String},
          Time:{type:String}
         }],

@@ -1,5 +1,6 @@
 
 ### get Articles
+
 POST  http://localhost:3007/Appointments/addPatientAppointment/645d0c802b62fe8bd38a5575
 Content-Type: application/json
 
@@ -10,6 +11,19 @@ Content-Type: application/json
     "AppointmentTime":"sunday",
     "PateintRequest":"Trust issues",
     "duration":"122"
+}
+###
+     
+POST  https://test-third-baseline.onrender.com/Appointments/addPatientAppointment/645d0c802b62fe8bd38a5575
+Content-Type: application/json
+
+{
+    "Patient":"6447230b6b72f3ad6db85f27",
+    "Doctor":"644720ec6b72f3ad6db85f19",
+    "AppointmentDate":"2023-05-15 18:56:13.202111",
+    "AppointmentTime":"12:00 am",
+    "PateintRequest":"ahhhh ya doctorrrr",
+    "duration":"30 m"
 }
 
 ### get home page by Doctor id
@@ -41,9 +55,29 @@ Content-Type: application/json
     "Comments":[{"Doctor":"63f96da5eec1af9d1c7f2566"}]
 }
 ### add likes
-PATCH  https://test-third-baseline.onrender.com/ArticleCommunication/patchCommunicationLikes/64446570332b391322ac06e3
+Get http://localhost:3007/Patients
+
+
+
+###
+PATCH  http://localhost:3007/patientSchadule/patchSchadule/6447230b6b72f3ad6db85f27
 Content-Type: application/json
 
 {
-"Likes":[{"DoctorId":"63f96da5eec1af9d1c7f9999"}]
+    "Appointment":["644720ec6b72f3ad6db85f19"],
+    "Pills":[{
+        "Image": "diaa",
+        "PillName": "diaa",
+        "Number": "diaa",
+        "FinishDate": "diaa",
+        "HowToUse": "diaa"
+       
+      }],
+    "Activities":[{
+        "Name": "diaa",
+        "Time": "diaa"
+      
+      }]
 }
+###
+GET http://localhost:3007/patientSchadule/6447230b6b72f3ad6db85f27

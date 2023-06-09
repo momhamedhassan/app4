@@ -42,11 +42,6 @@ module.exports=
         
             try {
             const prescribtion =await Presctibtion.findById(id)
-            .populate({
-                path:'Appointment',
-                model:AppintmentModel,
-                select:{__v:0}
-            })
             .exec();
             //const doctor =await Product.find({_id:id})
            if(!prescribtion){
@@ -94,22 +89,50 @@ module.exports=
 
             const id = req.params.id;
             const updates=req.body;
+            let flag=new Boolean(true);
+            if(!updates.NextAppointment){
+                flag=false;
+                console.log(flag)
+            }
             const options={new :true}
-                // res.send("updating a single product")
                   try 
                   {
-                   
-                    const result =await Presctibtion.findByIdAndUpdate(id,updates, options);
+                    if (flag==true) {
+                        
+                    
+                    //create new appointment
+                    const appointment=await AppintmentModel.create({Patient:updates.Patient,Doctor:updates.Doctor,AppointmentDate:updates.NextAppointment});
+                    console.log(updates.NextAppointment)
+                    console.log(updates.Doctor);
+                    console.log(updates.Patient)
+                    //create new prescribtion with Patient id, Doctor id,Appointment id
+                    const prescribtion=await Presctibtion.create({PatientId:appointment.Patient,DoctorId:appointment.Doctor,Appointment:appointment.id});
+                    console.log(prescribtion.id)
+
+                    //add prescribtion to appointment
+                    const addPrescrebtionToAppointment=await AppintmentModel.findByIdAndUpdate(
+                        {_id:appointment.id}, 
+                        {Prescribtion:prescribtion.id},
+                        options
+                    )
+                    //add pills , activity ,nextAppointment to it
+                    const result =await Presctibtion.findByIdAndUpdate(id,{Pills:updates.Pills,Activities:updates.Activities,NextAppointment:appointment.id}, options);
                 
-                    if(!result){throw createError(404,"Product does not exist ")}
+                    if(!result){throw createError(404,"Prescribtion does not exist ")}
                     res.send(result)
+                    }else{
+                        console.log("from else state")
+                    const result =await Presctibtion.findByIdAndUpdate(id,{Pills:updates.Pills,Activities:updates.Activities}, options);
+                    if(!result){throw createError(404,"Prescribtion does not exist ")}
+                    res.send(result)
+                    }
                   } 
                      
                   catch (error) 
                   {
                     console.log(error.message)
                     if (error instanceof mongoose.CastError)
-                    {return next(createError(400,"Invalid Product Id"))}
+                    {return next(createError(400,"Invalid Prescribtion Id"))}
                     next(error)
                   }  
         }

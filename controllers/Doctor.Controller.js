@@ -4,67 +4,52 @@ const Doctor =require('../Models/Doctor.Model');
 const ArticlesModel=require('../Models/Article/Article')
 const Appointment=require('../Models/Appointment.Model');
 const Patient = require('../Models/Patient.Model');
+const agoraUser=require('../Models/AgoraUser');
 
 module.exports=
 {
 getAllDoctors:async (req,res,next)=>{
-    //next(new Error("cannont geta list of all products"))
-    //res.send("getting a list of all products");
+    const doctorSpeciality=req.params.doctorSpeciality;
+    console.log(doctorSpeciality);
+    var ids=[];
+    try 
+    {
+        //agoraUser((name)(doctorid (Speciality)))
+        // const listOfDoctors = await agoraUser.find({}).populate('Doctor');
+        const Doctors=await Doctor.find({doctorSpeciality:doctorSpeciality});
 
-    try {
-        //const results = await Product.find({},{__v:0})
-        const results = await Doctor.find({},{})
+        Doctors.forEach(element => ids.push(JSON.stringify(element._id).replace(/['"]+/g, '')));
+        console.log(ids)
+        const records = await agoraUser.find({},{__v:0,access_token:0,created_at:0,expire_date:0,token:0,type:0,userType:0}).where('doctorId').in(ids).populate({
+            path:'doctorId',
+            model:Doctor,
+            select:{__v:0},
+            })
+            
         .exec();
         
-        res.send(results)
+        //const listOfDocSpetiality=await agoraUser.find({'doctorSpeciality':doctorSpeciality})
+
+        
+        res.json(records)
     } catch (error) {
         console.log(error.message);
     }
-
-
 },
 findDoctorById:async(req,res,next)=>{
-    const id =req.params.id;
-   
-
+    
+    const userId=req.payload.aud.replace(/['"]+/g, '');
+    const AgoraId=req.params.AgoraId;
+    console.log("....agora user...",AgoraId);
     try {
-    const doctor =await Doctor.findById(id)
-    .exec();
-    
-    //const j =doctor.Appointments;
-    
-    
-//    const patientsOfThisMonth=[];
-//     j.forEach((element) => {
-//     var date =new Date();
-//     const appointmentDate=element.AppointmentDate
-//     const f=new Date(appointmentDate);
-//     function isEqual(x,y){
-//         if(x==y){
-//             return true;
-//         }
-//         else{
-//             return false;
-//         }
-//     }
-
-//     if(isEqual(f.getMonth(),date.getMonth())){
-//         console.log('done')
-//         const r={"_id":element._id};
-
-//         doctor.patientsOfThisMonth.push(r)
-//    }
-//     console.log(f)
-  
-    
-// });
-
-    //const doctor =await Product.find({_id:id})
+    const result=await agoraUser.findById(AgoraId)
+    console.log("... doctor id ...",result.doctorId);
+    const doctor=await Doctor.findById({_id:result.doctorId},{__v:0});
+ 
    if(!doctor){
-throw createError(404,"Product does not exist")
+throw createError(404,"Doctor does not exist")
 
    }
-  
     res.send(doctor)
 } catch (error) {
     console.log(error.message);
@@ -78,18 +63,20 @@ throw createError(404,"Product does not exist")
 
 
 } ,
-PostDoctor:async (req,res,next)=>{
-
+PostDoctorInformation:async (req,res,next)=>{
+    const userId=req.payload.aud.replace(/['"]+/g, '');
+    const doctorInformation=req.body;
+    console.log(doctorInformation)
+   
     try { 
-        //const product=new Doctor(req.body);
+        console.log('...hello from post doctor informaion...')
+        const result=await agoraUser.find({_id:userId})
+        const DoctorId=JSON.stringify(result[0].doctorId).replace(/['"]+/g, '');
+        console.log(DoctorId);
 
-        // const result=await product.save()
-        // res.send(result);
-        // console.log(result);
-        // console.log(req.body);
-        const product= await Doctor.create(req.body);
-        console.log(product)
-        res.send(product)
+        const doctor=await Doctor.findByIdAndUpdate({_id:DoctorId},doctorInformation,{new:true});
+        console.log(doctor)
+        res.send(doctor);
         
     } catch (error) {
         console.log(error.message)
@@ -101,16 +88,7 @@ PostDoctor:async (req,res,next)=>{
     }
   
 
-    // const product = new Product({
 
-    //     name :req.body.name,
-    //     price:req.body.price
-    // })
-
-    // product
-    // .save()
-    // .then(result=>{console.log(result);res.send(result);})
-    // .catch(err=>{console.log(err.message)})
    
     
 

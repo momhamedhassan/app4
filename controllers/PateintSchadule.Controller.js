@@ -87,6 +87,54 @@ deleteSchadule:async(req,res,next)=>{
       next(error);
   }
 },
+//add Schadule
+addSchadule:async(req,res,next)=>{
+  const id = req.params.PatientId;
+  const updates=req.body;
+  const options={new :true}
+        try 
+        {
+          const addPill =await PatientSchaduleModel.findOneAndUpdate(
+          {PatientId:id}, 
+          { $addToSet:
+              {
+                  Pills:updates.Pills
+              },
+          },
+          );
+          console.log(updates.Pills);
+          const addActivities =await PatientSchaduleModel.findOneAndUpdate(
+            {PatientId:id}, 
+            { $addToSet:
+                {
+                    Activities:updates.Activities
+                },
+            },
+            );
+            const addAAppointment =await PatientSchaduleModel.findOneAndUpdate(
+              {PatientId:id}, 
+              { $addToSet:
+                  {
+                      Appointment:updates.Appointment
+                  }
+              },
+              );
+          
+          const result=await PatientSchaduleModel.find({PatientId:id});
+          if(!result){throw createError(404,"Schadule does not exist ")}
+          res.send(result)
+        } 
+           
+        catch (error) 
+        {
+          console.log(error.message)
+          if (error instanceof mongoose.CastError)
+          {return next(createError(400,"Invalid Product Id"))}
+          next(error)
+        }  
+      }
+,
+
 
 //Pills
 PatchSchadulePills:async(req,res,next)=>{

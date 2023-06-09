@@ -1,16 +1,23 @@
 const express =require ('express');
 const router =express.Router();
 const DoctorController = require('../controllers/Doctor.Controller');
+const {verifyAccessToken}=require('./../Database/jwt_helper')
 
-//router.get('/',ProductController.getAllToken);
-//Get all Product
-router.get('/',DoctorController.getAllDoctors);
-//Get Product By id 
-router.get('/:id',DoctorController.findDoctorById);
-//Post Product
-router.post('/',DoctorController.PostDoctor);
-//update Product
+//Get Doctor By id 
+router.get('/get/:AgoraId',DoctorController.findDoctorById);
+//Get all Doctor
+router.get('/:doctorSpeciality',DoctorController.getAllDoctors);
+
+//Post Doctor
+router.post('/',DoctorController.PostDoctorInformation);
+//update Doctor
 router.patch('/:id',DoctorController.UpdateDoctorById);
-//delete product
+//delete Doctor
 router.delete('/:id',DoctorController.DeleteDoctor);
+
+router.get('/getId/get',async(req,res,next)=>{
+    const userId=req.payload.aud.replace(/['"]+/g, '');
+    res.send(userId);
+  
+  })
 module.exports = router;

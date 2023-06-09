@@ -1,73 +1,188 @@
-get   http://localhost:3005/Doctors
+### User login (Patient 1) ,(Doctor 2)
+POST http://localhost:3007/api/Agoralogin
 Content-Type: application/json
 
 {
-    "Doctor":"63f96cfc48002698bbe28d09",
-    "Content":"mohamed",
-    "Date":"hassan",
-    "ArticleCommunication":"640d2dc3db8801119385c01a"
+  "email":"newDoctor2023@gmail.com",
+    "password":"mohamedhassano",
+    "name":"saad mostafa",
+    "avatar":"https://www.apetogentleman.com/wp-content/uploads/2018/06/top-male-models.jpg",
+    "type":6,
+    "userType":2
+}
+### add doctor information
+POST http://localhost:3007/api/Doctors
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYyNjExNTAsImV4cCI6MTY4NjMwNDM1MCwiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.VES-mI9BnpmqZsdczjVOk2hWo2MYG2CxgNLKIOmOKLs
+Content-Type: application/json
+
+{"doctorSpeciality":"happy",
+    "Rank":"12",
+    "location":"alex",
+    "experence_years":"2023",
+    "about_doctor":"very good",
+    "Age":22 
+}
+
+### get all doctors by speciality
+GET http://localhost:3007/api/Doctors/happy
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYxMzc3MjgsImV4cCI6MTY4NjE4MDkyOCwiYXVkIjoiXCI2NDdmZjUyZjQ0NDBlNDYzY2JhYTYxMDFcIiJ9.wqyrxwapzrkxLr2sjKuS7B2pt0NrjEvu0QuJ7tfu4OM
+
+
+###Patient get doctor info by doctor id
+GET  http://localhost:3007/api/Doctors/get/647f78299f3f46f277ab7eaf
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYwNzU0MzMsImV4cCI6MTY4NjExODYzMywiYXVkIjoiXCI2NDdmNzgyOTlmM2Y0NmYyNzdhYjdlYWZcIiJ9.j02Dm4FJDAXCN5zLj4LKgGZRgXxcYk8FbKTWJRG36SI
+### get doctor agora user information
+GET  http://localhost:3007/api/Doctors/get/647f78299f3f46f277ab7eb1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYwODM5MjcsImV4cCI6MTY4NjEyNzEyNywiYXVkIjoiXCI2NDdmNzg4NjlmM2Y0NmYyNzdhYjdlYjhcIiJ9.ZXntwvLUT_bbUl2eM8kRUvYEcGSPRvapmB1ricNWms0
+###get appointment
+GET http://localhost:3007/api/Appointments/647f806d3f7088f86177a94a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYwNzU0MzMsImV4cCI6MTY4NjExODYzMywiYXVkIjoiXCI2NDdmNzgyOTlmM2Y0NmYyNzdhYjdlYWZcIiJ9.j02Dm4FJDAXCN5zLj4LKgGZRgXxcYk8FbKTWJRG36SI
+###
+GET http://localhost:3007/api/Doctors/get/647f78299f3f46f277ab7eb1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYwNzU0MzMsImV4cCI6MTY4NjExODYzMywiYXVkIjoiXCI2NDdmNzgyOTlmM2Y0NmYyNzdhYjdlYWZcIiJ9.j02Dm4FJDAXCN5zLj4LKgGZRgXxcYk8FbKTWJRG36SI
+### Patient make payment
+GET  http://localhost:3007/api/Appointments/Payment
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYwNzU0MzMsImV4cCI6MTY4NjExODYzMywiYXVkIjoiXCI2NDdmNzgyOTlmM2Y0NmYyNzdhYjdlYWZcIiJ9.j02Dm4FJDAXCN5zLj4LKgGZRgXxcYk8FbKTWJRG36SI
+### Patient make appointment
+POST http://localhost:3007/api/Appointments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYwNzU0MzMsImV4cCI6MTY4NjExODYzMywiYXVkIjoiXCI2NDdmNzgyOTlmM2Y0NmYyNzdhYjdlYWZcIiJ9.j02Dm4FJDAXCN5zLj4LKgGZRgXxcYk8FbKTWJRG36SI
+Content-Type: application/json
+
+{
+  "paymentToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYwODYyMzYsImV4cCI6MTY4NjA4NjUzNiwiYXVkIjoiXCI2NDdmNzgyOTlmM2Y0NmYyNzdhYjdlYWZcIiJ9.EB5IjZgZH4BAE8X65akr_2jFDbbghVHpjlYdwJlrswQ",
+  "Doctor":"647f78299f3f46f277ab7eaf",
+  "AppointmentDate":"2023",
+   "AppointmentTime":"12",
+   "PateintRequest":"pain",
+   "duration":"1 h"
 
 }
+###find Patient by id
+GET http://localhost:3007/api/Appointments/GetPatientAppointments/647f36fffd93948cd365d700
+
+###Doctor Accept or deny
+GET  http://localhost:3007/api/Appointments/accept/647f4494dcfee4e8407f761a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYxNDkyOTgsImV4cCI6MTY4NjE5MjQ5OCwiYXVkIjoiXCI2NDgwOThiMjNjNTM0NGVhMWYwMjdhZDJcIiJ9.fnfgG3u46CB4yflmcSWLhsuKagQ0l2-BqNNgemUYDuQ
+
+
+###Patient or Doctor Get accepted appointment(upcomming appointments)
+Get http://localhost:3007/api/Appointments/accepted
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYxNDkyOTgsImV4cCI6MTY4NjE5MjQ5OCwiYXVkIjoiXCI2NDgwOThiMjNjNTM0NGVhMWYwMjdhZDJcIiJ9.fnfgG3u46CB4yflmcSWLhsuKagQ0l2-BqNNgemUYDuQ
+
+
 ###
-GET  http://localhost:3005/DoctorHomePage/63f96cfc48002698bbe28d09
-###
-DELETE   http://localhost:3005/Articles/644f215d825fb9a8e9505dd2
+Get http://localhost:3007/api/Appointments/waitingReq/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYxNDkyOTgsImV4cCI6MTY4NjE5MjQ5OCwiYXVkIjoiXCI2NDgwOThiMjNjNTM0NGVhMWYwMjdhZDJcIiJ9.fnfgG3u46CB4yflmcSWLhsuKagQ0l2-BqNNgemUYDuQ
+### Doctor Cancel Appointment
+GET  http://localhost:3007/api/Appointments/Cancel/647f4494dcfee4e8407f761a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYwNzExNzMsImV4cCI6MTY4NjExNDM3MywiYXVkIjoiXCI2NDdlMGM3OTM1NTc5ODhmYzNkNmZiMjZcIiJ9.JMqAyl2gSR3_1F1biblzWIjfsxsDZHURT1TWCnfCxpc
+
+
+### Patient get canceled appointment
+Get http://localhost:3007/api/Appointments/Canceled/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYxNDkzOTcsImV4cCI6MTY4NjE5MjU5NywiYXVkIjoiXCI2NDgwOTkxNTNjNTM0NGVhMWYwMjdhZDlcIiJ9.o_xfX9x-Ya9WpmVWxJB8ubPB-Ont49qvre8Om7iJR54
+
+
+###Doctor make prescribtion
+POST http://localhost:3007/api/Appointments/addPrescribtion
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODU4OTIzNjgsImV4cCI6MTY4NTkzNTU2OCwiYXVkIjoiXCI2NDdiY2I1NjZlZDNjYmUyZWQyODc0NDVcIiJ9.FT8Eny_KZ3xXf26fFZhn2ior5pwcZtFGGrDkCl9jBWY
 Content-Type: application/json
 
-{
-   "Doctor":"63f96cfc48002698bbe28d09",
-   "Content":"mohamed",
-   "Date":"moahmed",
-   "ArticleTitle":"mohamed"
+{ 
+  "appointmentId":"647ca8aee84b5a3af01b0e63",
+  "Pills":[
+        "647cd9c31db9ef594779d862"
+      ]
 }
-###
-GET  http://localhost:3005/Articles/ HTTP/1.1
-### create product
-POST http://localhost:3005/Appointments
+
+### admin add pill
+POST http://localhost:3007/api/Pills/
 Content-Type: application/json
 
 {
-   
-    "AppointmentDate": "Diaa",
-    "AppointmentTime": "Hosney",
-    "PateintRequest": "Hosney",
-     "Doctor":"63f00000760946737c1b3856",
-     "Patient":"64088ea123d4dfc194e82dfb"
+  "Image": "diaaddd",
+        "PillName": "diaa",
+        "Number": "diaa",
+        "FinishDate": "diaa",
+        "HowToUse": "diaa"
+}
+
+
+###Register Route
+POST http://localhost:3003/api/reset-password
+Content-Type: application/json
+
+{
+    "email":"moohass@gmail.com"
     
-
-
 }
 
 
 
-### get a product by id
-GET http://localhost:3005/Doctors
+###Logout Route
+DELETE http://localhost:3002/auth/logout
 
-### update a product by id
-PATCH  http://localhost:4000/products/63997efc6b22caf957d21e5
+
+### Doctor Create Article
+Post  http://localhost:3007/api/articles
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYyNjYxOTQsImV4cCI6MTY4NjMwOTM5NCwiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.LWsOKAtw7cn1__s1Zhy5v3D-XD4Ss-psg0bEEC6g5qc
+
+{
+  
+  "Content":"mohamed",
+  "Date":"mohaemd",
+  "ArticleTitle":"mohaemd",
+  "ArticleField":"mohaemd"
+}
+
+### Doctor get All Articles
+GET http://localhost:3007/api/articles
+
+
+### Doctor get Article By Id
+GET http://localhost:3007/api/articles/647ff6ba21c8925947c6b9b5
+
+
+###Doctor Post Article
+POST http://localhost:3007/api/articles
 Content-Type: application/json
 
 {
-    
-    "price":1799
+
 }
 
 
-### delete a product by id
-DELETE http://localhost:4000/products/63997f6f6b22caf957d21e60
+### Get Appointment by id
+GET http://localhost:3007/api/Appointments/64808323c35c0dc70b5d48eb
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYxNDM1MDEsImV4cCI6MTY4NjE4NjcwMSwiYXVkIjoiXCI2NDgwODE2M2MzNWMwZGM3MGI1ZDQ4ZDJcIiJ9.LUC8kiP9dJlFZ_r4LiWswvFMeO7N2zJ8xUYG_OEpG9o
+###Doctor get ArticleCommunication By id
+GET http://localhost:3007/api/ArticleCommunication/648254e3c4fe7fcb99e5a10d
 
 
 
+### Doctor Add Like
+GET  http://localhost:3007/api/ArticleCommunication/AddCommunicationLike/64826177299036c503b9ed8c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYyNjExNTAsImV4cCI6MTY4NjMwNDM1MCwiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.VES-mI9BnpmqZsdczjVOk2hWo2MYG2CxgNLKIOmOKLs
 
-
-### 404 route not found
-GET http://localhost:4000/nohfh
-
-###
-POST http://localhost:4000/test
+###Doctor Add Comments
+PATCH http://localhost:3007/api/ArticleCommunication/patchCommunicationComments/addComment/6482a5b257dcb6eafcbfc052
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYyNjExNTAsImV4cCI6MTY4NjMwNDM1MCwiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.VES-mI9BnpmqZsdczjVOk2hWo2MYG2CxgNLKIOmOKLs
 
 {
-    "name":"imacpro",
-    "price":4999
+  "Comments":[{"Content":"go issues","Time":"2023"}]
 }
+
+### Doctor get doc article Likes
+GET http://localhost:3007/api/ArticleCommunication/64826177299036c503b9ed8c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYyNjExNTAsImV4cCI6MTY4NjMwNDM1MCwiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.VES-mI9BnpmqZsdczjVOk2hWo2MYG2CxgNLKIOmOKLs
+
+### Doctor get another doctor like
+GET http://localhost:3007/api/ArticleCommunication/articleLikes/64826177299036c503b9ed8c
+
+
+
+### get doctor id by token
+GET http://localhost:3007/api/Doctors/getId/get
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYyNjExNTAsImV4cCI6MTY4NjMwNDM1MCwiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.VES-mI9BnpmqZsdczjVOk2hWo2MYG2CxgNLKIOmOKLs
