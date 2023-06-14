@@ -3,12 +3,12 @@ POST http://localhost:3007/api/Agoralogin
 Content-Type: application/json
 
 {
-  "email":"newDoctor2023@gmail.com",
+  "email":"newDoctor20323@gmail.com",
     "password":"mohamedhassano",
     "name":"saad mostafa",
     "avatar":"https://www.apetogentleman.com/wp-content/uploads/2018/06/top-male-models.jpg",
     "type":6,
-    "userType":2
+    "userType":1
 }
 ### add doctor information
 POST http://localhost:3007/api/Doctors
@@ -42,15 +42,15 @@ GET http://localhost:3007/api/Doctors/get/647f78299f3f46f277ab7eb1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYwNzU0MzMsImV4cCI6MTY4NjExODYzMywiYXVkIjoiXCI2NDdmNzgyOTlmM2Y0NmYyNzdhYjdlYWZcIiJ9.j02Dm4FJDAXCN5zLj4LKgGZRgXxcYk8FbKTWJRG36SI
 ### Patient make payment
 GET  http://localhost:3007/api/Appointments/Payment
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYwNzU0MzMsImV4cCI6MTY4NjExODYzMywiYXVkIjoiXCI2NDdmNzgyOTlmM2Y0NmYyNzdhYjdlYWZcIiJ9.j02Dm4FJDAXCN5zLj4LKgGZRgXxcYk8FbKTWJRG36SI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY2MzU1ODAsImV4cCI6MTY4NjY3ODc4MCwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.35VaNhXPMwTGq0BhqSc-xz5yQ9LdmcavT0P4OiBSlXc
 ### Patient make appointment
 POST http://localhost:3007/api/Appointments
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYwNzU0MzMsImV4cCI6MTY4NjExODYzMywiYXVkIjoiXCI2NDdmNzgyOTlmM2Y0NmYyNzdhYjdlYWZcIiJ9.j02Dm4FJDAXCN5zLj4LKgGZRgXxcYk8FbKTWJRG36SI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY2MzU1ODAsImV4cCI6MTY4NjY3ODc4MCwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.35VaNhXPMwTGq0BhqSc-xz5yQ9LdmcavT0P4OiBSlXc
 Content-Type: application/json
 
 {
-  "paymentToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYwODYyMzYsImV4cCI6MTY4NjA4NjUzNiwiYXVkIjoiXCI2NDdmNzgyOTlmM2Y0NmYyNzdhYjdlYWZcIiJ9.EB5IjZgZH4BAE8X65akr_2jFDbbghVHpjlYdwJlrswQ",
-  "Doctor":"647f78299f3f46f277ab7eaf",
+  "paymentToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY2MzU1OTQsImV4cCI6MTY4NjYzNTg5NCwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.UKCK7yCF5w0O8yHeXyq18babOnhtHDqj2jjP0HD072A",
+  "Doctor":"64822b932cbfd0b0fd1ef453",
   "AppointmentDate":"2023",
    "AppointmentTime":"12",
    "PateintRequest":"pain",
@@ -154,8 +154,8 @@ Content-Type: application/json
 
 
 ### Get Appointment by id
-GET http://localhost:3007/api/Appointments/64808323c35c0dc70b5d48eb
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYxNDM1MDEsImV4cCI6MTY4NjE4NjcwMSwiYXVkIjoiXCI2NDgwODE2M2MzNWMwZGM3MGI1ZDQ4ZDJcIiJ9.LUC8kiP9dJlFZ_r4LiWswvFMeO7N2zJ8xUYG_OEpG9o
+GET http://localhost:3007/api/Prescribtion/64847ed508970c9f5967eb38
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY0MDMwNjEsImV4cCI6MTY4NjQ0NjI2MSwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.ZDK_SsuudT31H80mZt2MaX6W88qPC2jXZczKjf4HgoI
 ###Doctor get ArticleCommunication By id
 GET http://localhost:3007/api/ArticleCommunication/648254e3c4fe7fcb99e5a10d
 
@@ -189,3 +189,88 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgd
 
 ###
 GET http://localhost:3007/api/test
+
+
+
+###Doctor add prescribtion (patch)
+PATCH http://localhost:3007/api/Prescribtion/64880460c3d3f5efe7408f93
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY2MzM4NTcsImV4cCI6MTY4NjY3NzA1NywiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.gBiPDJcqXpYz3boIh_54hscf0h5ajCBqLuGppUqkKXk
+
+{
+  "Pills":
+    [{
+    "pillId":"64847ac9b9185c64ede0991c",
+    "StartDate":"2024",
+    "FinishDate":"2023",
+    "PillTime":"12:00",
+    "HowToUse":"ashrabha",
+    "Description":"711111 marat",
+    "dose":4
+    }],
+    "Activities":[{
+      "ActivityId":"6484951bb2686627210a3aa1"
+    }],
+    "isNext":true
+
+}
+
+### admin create pills
+POST http://localhost:3007/api/Pills
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY0MDQxMzUsImV4cCI6MTY4NjQ0NzMzNSwiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.jbCY-UVKBgLnYQXQ7R0kdLksbrXMQHvpnTqZeCRsDm4
+{
+  "Image":"https://i0.wp.com/healthpluscity.com/wp-content/uploads/2021/09/Untitled-2-3.png?resize=803%2C703&ssl=1",
+  "PillName":"tramadol",
+  "Number":"12"
+}
+
+### admin create Activity
+POST http://localhost:3007/api/Activity
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY0MDQxMzUsImV4cCI6MTY4NjQ0NzMzNSwiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.jbCY-UVKBgLnYQXQ7R0kdLksbrXMQHvpnTqZeCRsDm4
+
+{
+  "Image":"https://i0.wp.com/healthpluscity.com/wp-content/uploads/2021/09/Untitled-2-3.png?resize=803%2C703&ssl=1",
+  "ActiviryName":"tramadol"
+}
+
+
+### get all prescribtion
+GET http://localhost:3007/api/Prescribtion
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY0MTM3OTksImV4cCI6MTY4NjQ1Njk5OSwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.oPsRU8NlElf4KeFctmHv2a7yEPOziClBOy9jUmzznrY
+
+
+
+###Add Turn
+PATCH http://localhost:3007/api/Prescribtion/addTurn/64880460c3d3f5efe7408f93/6488463a20e6b16539c8722a
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY2MzU1ODAsImV4cCI6MTY4NjY3ODc4MCwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.35VaNhXPMwTGq0BhqSc-xz5yQ9LdmcavT0P4OiBSlXc
+
+{
+  "TurnTime":{"TimeOfturn":"Test"},
+  "Type":2
+}
+###find appointment by id
+GET http://localhost:3007/api/Appointments/64880460c3d3f5efe7408f93
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY2MzU1ODAsImV4cCI6MTY4NjY3ODc4MCwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.35VaNhXPMwTGq0BhqSc-xz5yQ9LdmcavT0P4OiBSlXc
+
+### get Prescribtion by id
+GET http://localhost:3007/api/Prescribtion/64880460c3d3f5efe7408f95
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY2MzU1ODAsImV4cCI6MTY4NjY3ODc4MCwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.35VaNhXPMwTGq0BhqSc-xz5yQ9LdmcavT0P4OiBSlXc
+
+### delete pill from prescribtion 
+DELETE http://localhost:3007/api/Prescribtion/deletePill/648539ee9bfea954458d99d6/6487105c43fef90a08211c84
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY1NzMxMjgsImV4cCI6MTY4NjYxNjMyOCwiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.V3ZYYquYYPVNK9E7h7KWLJ5msy6j830kv6aaa0VL4E4
+### delete activity
+DELETE http://localhost:3007/api/Prescribtion/deleteActivity/648539ee9bfea954458d99d6/64853c041d3b9a7adcbfcdb5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY0MTM3OTksImV4cCI6MTY4NjQ1Njk5OSwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.oPsRU8NlElf4KeFctmHv2a7yEPOziClBOy9jUmzznrY
+
+### pateint Complete Pill
+Get http://localhost:3007/api/Prescribtion/CompletedPill/64880460c3d3f5efe7408f93/64883baa428a3458e3e1806b
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY2MzU1ODAsImV4cCI6MTY4NjY3ODc4MCwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.35VaNhXPMwTGq0BhqSc-xz5yQ9LdmcavT0P4OiBSlXc
+
+
+### 
+GET http://localhost:3007/do-something
