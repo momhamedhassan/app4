@@ -4,8 +4,8 @@ const ObjectId =mongoose.Types.ObjectId;
 const ActivitySchema = new Schema({
     
         image:{type:String},
-        Name:{type:String},
-        Time:{type:String}
+        ActiviryName:{type:String}
+        
     
 });
 

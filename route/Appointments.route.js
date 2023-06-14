@@ -4,6 +4,7 @@ const {verifyPayment}=require('./../Database/jwt_helper')
 const AppointmentController = require('../controllers/Appointment.controller');
 const PaymentController = require('../controllers/Payment.controller');
 
+router.get   ('/pastAppointments')
 router.get   ('/accept/:appointmentId',AppointmentController.DoctorAcceptAppointment);
 router.get   ('/waitingReq/',AppointmentController.findWaitingAppointment);
 router.get   ('/Payment/',PaymentController.postPayment);

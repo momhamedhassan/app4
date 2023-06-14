@@ -222,7 +222,8 @@ findAppointmentById:async(req,res,next)=>{
     console.log(id)
 
     try {
-    const appointment =await Appointment.find({_id:id})
+        console.log('...hello from find appointment by id ...')
+    const appointment =await Appointment.findById(id)
     .exec();
     console.log(appointment)
     //const doctor =await Product.find({_id:id})

@@ -38,7 +38,9 @@ AppointmentSchema.post('save',async function(next){
     const doctorId =mongoose.Types.ObjectId(this.Doctor);
     try {
         console.log("...hello form middleware ...",this.Prescribtion)
-       if(this.Prescribtion!=null){if(patientId && doctorId) {
+       if(this.Prescribtion==null){
+        
+        if(patientId && doctorId) {
         const prescribtion=await Prescribtion.create(
             {PatientId:patientId,
             DoctorId:doctorId,
@@ -48,7 +50,10 @@ AppointmentSchema.post('save',async function(next){
             {_id:this._id},
             {Prescribtion:prescribtion._id},
             {new:true})
-       console.log(addPrescrebtionToAppointment)}}
+       console.log(addPrescrebtionToAppointment)
+    }
+
+}
        
             
          

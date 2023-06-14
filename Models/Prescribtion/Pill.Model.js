@@ -5,12 +5,8 @@ const PillSchema = new Schema({
     
     Image:{type:String},
     PillName:{type:String},
-    Number:{type:String},
-    StartDate:{type:String},
-    FinishDate:{type:String},
-    PillTime:{String},
-    HowToUse:{type:String},
-    Description:{type:String}
+    Number:{type:String}
+    
     
 });
 

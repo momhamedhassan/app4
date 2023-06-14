@@ -51,7 +51,7 @@ findActivityById:async(req,res,next)=>{
 AddActivity:async (req,res,next)=>{
     const activityData=req.body;
     try { 
-      const activity=await Activity.create(pillData);
+      const activity=await Activity.create(activityData);
       res.json({code:0,data:{activity},msg:"add activity successfuly"})
         
     } catch (error) {

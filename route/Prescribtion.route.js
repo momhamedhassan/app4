@@ -2,15 +2,23 @@ const express =require ('express');
 const router =express.Router();
 const PrescribtionController = require('../controllers/Prescribtion.Controller');
 
-//router.get('/',ProductController.getAllToken);
-//Get all Product
+
+//Get all Prescribtion
 router.get('/',PrescribtionController.getAllPrescribtions);
-//Get Product By id 
+//Get Prescribtion By id 
 router.get('/:id',PrescribtionController.findPrescribtionById);
-//Post Product
+//Post Prescribtion
 router.post('/',PrescribtionController.postPrescribtion);
-//update Product
-router.patch('/:id',PrescribtionController.UpdatePrescribtionById);
-//delete product
+//update Prescribtion
+router.patch('/:appointmentId',PrescribtionController.UpdatePrescribtionById);
+//delete Prescribtion
 router.delete('/:id',PrescribtionController.DeletePrescribtion);
+
+router.get('/CompletedPill/:appointmentId/:pillId',PrescribtionController.CompletedPill);
+router.delete('/deletePill/:prescribtionId/:PillId',PrescribtionController.deletePill);
+
+
+router.delete('/deleteActivity/:prescribtionId/:ActivityId',PrescribtionController.deletActivity);
+
+router.patch('/addTurn/:appointmentId/:pillId',PrescribtionController.AddTurn);
 module.exports = router;
