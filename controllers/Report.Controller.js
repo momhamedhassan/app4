@@ -56,15 +56,10 @@ throw createError(404,"Product does not exist")
 PostReport:async (req,res,next)=>{
 
     try { 
-        //const product=new Doctor(req.body);
-
-        // const result=await product.save()
-        // res.send(result);
-        // console.log(result);
-        // console.log(req.body);
+        
         const report= await Report.create(req.body);
         console.log(report)
-        res.send(report)
+        res.send(report._id)
         
     } catch (error) {
         console.log(error.message)

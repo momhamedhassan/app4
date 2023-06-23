@@ -3,17 +3,16 @@ POST http://localhost:3007/api/Agoralogin
 Content-Type: application/json
 
 {
-  "email":"drDiaaAhmed@gmail.com",
+  "email":"Ahmed@gmail.com",
     "password":"password",
-    "name":"Saad Mostafa",
+    "name":"Ahmed khaled",
     "avatar":"https://th.bing.com/th/id/R.215c1ff399e961851cc11a7810886a0e?rik=oZfxvnavGwz6cA&riu=http%3a%2f%2fwww.writergirl.com%2fwp-content%2fuploads%2f2014%2f11%2fDoctor-790X1024.jpg&ehk=CmnYm47Si7SLogCKQcVQ9Onueou53ycpcjvFFc3Ej00%3d&risl=&pid=ImgRaw&r=0",
-    "type":7,
+    "type":6,
     "userType":2
 }
 ### add doctor information
 POST http://localhost:3007/api/Doctors
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODc0OTk3NjUsImV4cCI6MTY4NzU0Mjk2NSwiYXVkIjoiXCI2NDk1MzNmNWJlMzU4MmEwOGQxZGE3OWZcIiJ9.DYj9U9g7F9W55FCBV9-b0_yYO3O-hCPKl_X7KtMtmp0
-Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODc1NTQzNzksImV4cCI6MTY4NzU5NzU3OSwiYXVkIjoiXCI2NDk2MDkyZWI1M2M2ZWMxM2JjMWM0NjJcIiJ9.cZTrlk9qJq1xZD45NIWr3LleROj3uNdiW4xr_lqc72I
 
 {"doctorSpeciality":"Dentistry",
     "Rank":"12",
@@ -189,7 +188,14 @@ GET http://localhost:3007/api/Doctors/getId/get
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYyNjExNTAsImV4cCI6MTY4NjMwNDM1MCwiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.VES-mI9BnpmqZsdczjVOk2hWo2MYG2CxgNLKIOmOKLs
 
 ###
-GET http://localhost:3007/api/test
+POST http://localhost:3007/api/Report
+Content-Type: application/json
+
+{
+  "Prescribtion":"",
+  "PateintCase":"",
+  "Dignose":""
+}
 
 
 

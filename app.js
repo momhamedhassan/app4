@@ -67,7 +67,7 @@ app.use('/api/payment',verifyAccessToken,PaymentRoute)
 app.use('/Articles',ArticleRoute);
 app.use('/api/ArticleCommunication',verifyAccessToken,ArticleCommunicationRoute);
 app.use('/api/Prescribtion',verifyAccessToken,PrescribtionRoute);
-app.use('/Report',ReportRoute);
+app.use('/api/Report',ReportRoute);
 app.use('/DoctorHomePage',DoctorHomePageRouter);
 app.use('/patientSchadule',PateintSchaduleRouter);
 app.use('/PatientHomePage',PatientHomePageRouter);
