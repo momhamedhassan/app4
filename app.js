@@ -188,6 +188,7 @@ app.post('/api/send_notice',verifyAccessToken,async (req, res)=> {
          res.status(200).json({ code: 0, data: to_token, msg: 'success' }); 
            
         } else if (call_type === 'voice') {
+          console.log("...hello from voice ...")
           const message = {
             token: device_token,
             data: {
@@ -206,19 +207,13 @@ app.post('/api/send_notice',verifyAccessToken,async (req, res)=> {
               },
             },
           };
-        //   admin.messaging().send(message,function(err,res){
-        //   if(err){
-        //       throw createError(500,`error fcm token ${err}` )
-        //   }else{
-        //     res.status(200).json({ code: 0, data: to_token, msg: 'success' });
-        //   }
-        //  });
          const result=await admin.messaging().send(message);
 
          console.log(result)
           res.status(200).json({ code: 0, data: to_token, msg: 'success' }); 
         
         } else if (call_type === 'video') {
+          console.log("... hello from video ...")
           const message = {
             token: device_token,
             data: {
