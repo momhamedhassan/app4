@@ -157,6 +157,7 @@ app.post('/api/send_notice',verifyAccessToken,async (req, res)=> {
     //callee information
     const to_token  = req.query.to_token;
     const call_type = req.query.call_type;
+    console.log(call_type)
     const to_avatar = req.query.to_avatar;
     const to_name   = req.query.to_name;
     const doc_id    = req.query.doc_id || '';
