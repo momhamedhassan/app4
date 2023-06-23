@@ -22,7 +22,7 @@ module.exports=
 getAllActivities:async (req,res,next)=>{
     try{
         const activity =await Activity.find({});
-        res.json({code:0,data:{activity},msg:"get all activities successfuly"})
+        res.json(activity);
 
 
     } catch (error) {

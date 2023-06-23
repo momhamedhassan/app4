@@ -211,14 +211,14 @@ router.post('/refresh-token',async(req,res,next)=>{
 router.delete('/logout',async(req,res,next)=>{
     res.send("logout route")
 })
-router.post('/bind_fcmtoken',async(req,res,next)=>{
-  const {token,fcmtoken}=req.body;
-  if(!fcmtoken){
-    res.json({'code':-1,data:{},msg:"error getting the token"})
-  }
-  const User=await AgoraUser.findByIdAndUpdate({token},{fcmtoken},{new:true})
-  res.json({'code':0,data:{},msg:"success"})
-})
+// router.post('/bind_fcmtoken',async(req,res,next)=>{
+//   const {token,fcmtoken}=req.body;
+//   if(!fcmtoken){
+//     res.json({'code':-1,data:{},msg:"error getting the token"})
+//   }
+//   const User=await AgoraUser.findByIdAndUpdate({token},{fcmtoken},{new:true})
+//   res.json({'code':0,data:{},msg:"success"})
+// })
 
 
 module.exports=router;

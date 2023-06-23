@@ -22,7 +22,7 @@ module.exports=
 getAllPills:async (req,res,next)=>{
     try{
         const Pills =await Pill.find({});
-        res.json({code:0,data:{Pills},msg:"get all Pills successfuly"})
+        res.json(Pills);
 
 
     } catch (error) {

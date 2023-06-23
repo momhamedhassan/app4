@@ -10,8 +10,16 @@ DoctorId:{type:ObjectId,ref:"AgoraUser"},
 
 Appointment:{type:ObjectId,ref:'Appointment'},
 
-Pills:[
-   { pillId:{type:ObjectId,ref:"Pill"},
+remainingPills:[{
+    pillId:{type:ObjectId,ref:"Pill"}
+}],
+
+allDone:{type:Number},
+
+Pills:
+[
+{   
+    pillId:{type:ObjectId,ref:"Pill"},
     StartDate:{type:String},
     FinishDate:{type:String},
     PillTime:{String},
@@ -24,10 +32,7 @@ Pills:[
     //NumberOfUse calculated from How to use
     NumberOfUse:{type:Number},
     turn:[{TimeOfturn:{type:String}}],
-    MissedTurn:[{TimeOfturn:{type:String}}
-    
-    ]
-
+    MissedTurn:[{TimeOfturn:{type:String}}]
 }
 ],
 Activities:
@@ -35,6 +40,7 @@ Activities:
         ActivityId:{type:ObjectId,ref:"Activity"},
         Taken:{type:Boolean},
     }],
+
 NextAppointment:{
     type:ObjectId,ref:'Appointment'
 }

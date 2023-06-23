@@ -24,6 +24,7 @@ module.exports=
                     model:Activity,
                     select:{__v:0}
                 })
+                
                 .exec();
                 res.send(results)
             } catch (error) {
@@ -51,7 +52,12 @@ module.exports=
             console.log(id)
         
             try {
-            const prescribtion =await Presctibtion.findById(id)
+            const prescribtion =await Presctibtion.findById(id).
+            populate({
+                path:'Pills.pillId',
+                model:Pill,
+                select:{__v:0}
+            })
             .exec();
           
            if(!prescribtion){
@@ -103,21 +109,29 @@ module.exports=
             console.log("doctorId",userId);
             const updates=req.body;
             console.log(updates);
+            
+            var remainingPills=[];
+            updates.Pills.forEach(element => {
+              console.log("... pill Id ...",element.pillId)
+              remainingPills.push({pillId:element.pillId})
+            });
+            console.log(remainingPills)
+            console.log( updates.Pills)
            
 
             const options={new :true}
                   try 
                   {
-                    const currentAppointment=await AppintmentModel.findById({_id:appointmentId});
+                    const currentAppointment=await AppintmentModel.findByIdAndUpdate({_id:appointmentId},{Done:true},{new:true});
                     console.log("current appointment",currentAppointment);
 
                     if(userId && userId==currentAppointment.Doctor)
                    { 
                     if(updates.isNext){
                     //add next appointment 
-                    const nextAppointment=await appointment.create({Patient:currentAppointment.Patient,Doctor:userId,AppointmentDate:updates.nextAppointment,accepted:true})
+                    const nextAppointment=await appointment.create({Patient:currentAppointment.Patient,Doctor:userId,AppointmentDate:updates.nextAppointment,AppointmentTime:updates.appointmentTime,accepted:true})
                     //add pills and activity
-                    await Presctibtion.updateOne({_id:currentAppointment.Prescribtion},{ $addToSet:{Pills:updates.Pills,Activities:updates.Activities}}, options);
+                    await Presctibtion.updateOne({_id:currentAppointment.Prescribtion},{ $addToSet:{Pills:updates.Pills,remainingPills:remainingPills,Activities:updates.Activities}}, options);
                     const result=await Presctibtion.findByIdAndUpdate({_id:currentAppointment.Prescribtion},{NextAppointment:nextAppointment._id},{new:true})
                 
                     if(!result){throw createError(404,"Prescribtion does not exist ")}
@@ -168,21 +182,23 @@ module.exports=
 
 
 
-                 Presctibtion.findOne({ _id: currentAppointment.Prescribtion },async function(err, Pills) {
+                 Presctibtion.findOne({ _id: currentAppointment.Prescribtion },async function(err, Presc) {
                     if (err) {
                       console.log(err);
-                    } else if (!Pills) {
-                      console.log('Pills not found.');
+                    } else if (!Presc) {
+                      console.log('Presc not found.');
                     } else {
+                      console.log("... Presc ...",Presc);
                        
-                      const pilll = Pills.Pills.find(r => r._id.equals(pillId));
+                      const pilll = Presc.Pills.find(r => r._id.equals(pillId));
+                      
                       if (!pilll) {
                         console.log('Pill not found.');
                       } else {
                         
                         if (pilll.dose > 0) {
                           pilll.dose--;
-                          Pills.save(async function(err) {
+                          Presc.save(async function(err) {
                             if (err) {
                               console.log(err);
                               
@@ -191,7 +207,7 @@ module.exports=
                               if(type==1){
                                 //decrease number of dose
                                 //add Turn
-                                await Presctibtion.updateOne({_id: currentAppointment.Prescribtion ,'Pills._id':pillId},{ $addToSet: { "Pills.$.turn": updates } })
+                                await Presctibtion.updateOne({_id: currentAppointment.Prescribtion ,'Pills._id':pillId},{$addToSet: { "Pills.$.turn": updates }})
                                 //calculate next turn
                                 
                                 //1-get numberOfUse 
@@ -204,9 +220,22 @@ module.exports=
                                 //2-check dose (get nextdose)
                                 //if still
 
-
+                                //await Presctibtion.updateOne({_id: currentAppointment.Prescribtion ,'Pills._id':pillId},{ "Pills.$.allTaken": true})
+                                
+                                //const c=Presc.remainingPills.find(r => r._id.equals(pilll.pillId));
+                             if(pilll.dose==0){
+                              await Presctibtion.updateOne({_id: currentAppointment.Prescribtion ,'Pills._id':pillId},{ "Pills.$.allTaken": true})
+                              const r2=await Presctibtion.findByIdAndUpdate({_id: currentAppointment.Prescribtion },{$pull:{remainingPills:{pillId:pilll.pillId}}},{new:true}) 
+                              console.log(r2)
+                              res.send(r2)
+                             }else{
                                 const r2=await Presctibtion.findById(currentAppointment.Prescribtion)
+
                                 res.send(r2)
+                             }
+
+
+                              
                               }
                               else if(type==2){
                                 await Presctibtion.updateOne({_id: currentAppointment.Prescribtion ,'Pills._id':pillId},{ $addToSet: { "Pills.$.MissedTurn": updates }})
@@ -220,10 +249,8 @@ module.exports=
                             }
                           });
                         }else{
-                            const r=await Presctibtion.updateOne({_id: currentAppointment.Prescribtion ,'Pills._id':pillId},{ "Pills.$.allTaken": true  })
-                            const r2=await Presctibtion.findById({_id: currentAppointment.Prescribtion ,'Pills._id':pillId})
-                            console.log(r2)
-                            res.send("you reach dose limit")
+                             res.send("you reached limit of dose")
+                            
                         }
                       }
                     }

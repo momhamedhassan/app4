@@ -10,17 +10,88 @@ const prescribtion = require('../Models/Prescribtion.Model');
 const AgoraUser=require('./../Models/AgoraUser')
 const Doctor=require('./../Models/Doctor.Model');
 const Patient = require('../Models/Patient.Model');
+const Pill = require('../Models/Prescribtion/Pill.Model');
+const Activity = require('../Models/Prescribtion/Activity.Model');
+const appointment = require('../Models/Appointment.Model');
+const admin=require('firebase-admin');
+const fcm=require('@diavrank/fcm-notification');
+const serviceAccount=require('./../final-project-agora-firebase-adminsdk-bnzot-b86370206b.json')
+require('dotenv').config();
+
+  
+  
+  const nocache = (_, resp, next) => {
+      resp.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+      resp.header('Expires', '-1');
+      resp.header('Pragma', 'no-cache');
+      next();
+    }
 
 module.exports=
 {findAppointmentByPateintId:async(req,res,next)=>{
-    const id =req.params.patientId;
+    console.log("hello from find appointment by patient id")
+    const userId=req.payload.aud.replace(/['"]+/g, '');
+
     try {
-    const appointment =await Appointment.find({Pateint:id})
+    const appointment =await Appointment.find({Patient:userId,Done: true})
+    .populate({
+        path:'Prescribtion',
+        model:Prescribtion,
+       
+        select:{__v:0,PatientId:0,DoctorId:0,Appointment:0},
+        populate:{
+            path:'NextAppointment',
+            model:Appointment,
+            select:{__v:0,Patient:0,Prescribtion:0},
+            },
+                populate:{
+                path:'Pills.pillId',
+                model:Pill,
+                select:{__v:0},
+                }
+        })
+    .populate({
+            path:'Prescribtion',
+            model:Prescribtion,
+            select:{__v:0,PatientId:0,DoctorId:0,Appointment:0},
+            
+            
+                populate:{
+                    path:'remainingPills.pillId',
+                    model:Pill,
+                    select:{__v:0},
+                    },
+                    populate:{
+                        path:'Activities.ActivityId',
+                        model:Activity,
+                        select:{__v:0},
+                        }
+        })
+    .populate({
+                        path:'Prescribtion',
+                        model:Prescribtion,
+                        select:{__v:0,PatientId:0,DoctorId:0,Appointment:0},
+                        
+                        
+                            populate:{
+                                path:'remainingPills.pillId',
+                                model:Pill,
+                                select:{__v:0},
+                                },
+                                populate:{
+                                    path:'NextAppointment',
+                                    model:Appointment,
+                                    select:{__v:0},
+                                    }
+                                
+        })
+    
+
     .exec();
     console.log(appointment)
   
    if(!appointment){
-throw createError(404,"Appointment does not exist")
+    throw createError(404,"Appointment does not exist")
 
    }
   
@@ -42,9 +113,12 @@ findWaitingAppointment:async (req,res,next)=>{
     try {
         console.log('.... hello from waiting appointment req ....');
         const UserType=await AgoraUser.findById(userId)
-            console.log(UserType);
+
+        console.log(UserType);
         console.log(UserType.userType);
+
             if(UserType.userType==1){
+
                 console.log('patient');
                 const results = await Appointment.find({Patient:userId,accepted:false,canceled:false}).populate({
                     path:'Doctor',
@@ -61,15 +135,9 @@ findWaitingAppointment:async (req,res,next)=>{
                     }).exec();
                 res.send(results)
             }else{throw createError(404,"invalid UserType ")}
-
-
-       
-        
     } catch (error) {
         console.log(error.message);
     }
-
-
 }
 
 
@@ -90,7 +158,7 @@ getAcceptedAppointments:async (req,res,next)=>{
         console.log(UserType.userType);
         if(UserType.userType==1){
             console.log('patient');
-            const results = await Appointment.find({Patient:userId,accepted:true},{Patient:0,__v:0}).populate({
+            const results = await Appointment.find({Patient:userId,accepted:true,Done:false},{Patient:0,__v:0}).populate({
                 path:'Doctor',
                 model:AgoraUser,
                 select:{__v:0,access_token:0,created_at:0,expire_date:0,token:0,type:0,password:0,userType:0,email:0},
@@ -98,7 +166,7 @@ getAcceptedAppointments:async (req,res,next)=>{
             res.send(results)
         }else if(UserType.userType){
             console.log('Doctor');
-            const results = await Appointment.find({Doctor:userId,accepted:true},{Doctor:0}).populate({
+            const results = await Appointment.find({Doctor:userId,accepted:true,Done:false},{Doctor:0}).populate({
                 path:'Patient',
                 model:AgoraUser,
                 select:{__v:0,access_token:0,created_at:0,expire_date:0,token:0,type:0,password:0,userType:0,email:0},
@@ -172,7 +240,7 @@ doctorCancelAppointment:async(req,res,next)=>{
             else{throw createError(404,"invalid Doctor ")}
               
         
-            if(!appointment){throw createError(404,"Product does not exist ")}
+            if(!appointment){throw createError(404,"Appointment does not exist ")}
            
           } 
              
@@ -180,32 +248,64 @@ doctorCancelAppointment:async(req,res,next)=>{
           {
             console.log(error.message)
             if (error instanceof mongoose.CastError)
-            {return next(createError(400,"Invalid Product Id"))}
+            {return next(createError(400,"Invalid Appointment Id"))}
             next(error)
           }  
         }
 ,
 DoctorAcceptAppointment:async(req,res,next)=>{
     const userId=req.payload.aud.replace(/['"]+/g, '');
+    console.log("... sender id ...",userId);
+    const caller=await AgoraUser.findById({_id:userId});
+    const user_avatar = caller.avatar;
+    const user_name = caller.name;
+  
     const AppointmentId=req.params.appointmentId;
     console.log(AppointmentId);
         
           try 
           {
+
            console.log('.... hello from accept appointment...')
+           
             const appointment =await Appointment.findById(AppointmentId);
+            const patient=await AgoraUser.findById(appointment.Patient);
+            const patientFCMToken=patient.fcmtoken;
             console.log(appointment);
             console.log(appointment.Doctor);
             console.log(userId);
             if(appointment.Doctor==userId){
                 const result=await Appointment.findByIdAndUpdate({_id:AppointmentId},{accepted:true,canceled:false},{new:true})
+                if(result){
+                    const message = {
+                        token: patientFCMToken,
+                        data: {
+                          token: userId,
+                          avatar: user_avatar,
+                          name: user_name,
+                          call_type: appointmentAccepted,
+                        },
+                        android: {
+                          priority: 'high',
+                          notification: {
+                            channel_id: 'xxx',
+                            title: 'Appointment Accepted by ' + user_name,
+                            body: 'Please click to view',
+                          },
+                        },
+                      };
+                     
+                      const r=await admin.messaging().send(message);
+                      console.log(r);
+                      
+                }
                 res.send(result)
 
             }
             else{throw createError(404,"invalid Doctor ")}
               
         
-            if(!appointment){throw createError(404,"Product does not exist ")}
+            if(!appointment){throw createError(404,"Appointment does not exist ")}
            
           } 
              
@@ -213,7 +313,7 @@ DoctorAcceptAppointment:async(req,res,next)=>{
           {
             console.log(error.message)
             if (error instanceof mongoose.CastError)
-            {return next(createError(400,"Invalid Product Id"))}
+            {return next(createError(400,"Invalid Appointment Id"))}
             next(error)
           }  
 },
@@ -226,7 +326,7 @@ findAppointmentById:async(req,res,next)=>{
     const appointment =await Appointment.findById(id)
     .exec();
     console.log(appointment)
-    //const doctor =await Product.find({_id:id})
+    //const doctor =await Appointment.find({_id:id})
    if(!appointment){
 throw createError(404,"Appointment does not exist")
 
@@ -320,7 +420,7 @@ DeleteAppointment:async(req,res,next)=>{
     try {
         const result =await Appintment.findByIdAndDelete(id)
         if(!result){
-            throw createError(404,"Product does not exist")
+            throw createError(404,"Appointment does not exist")
             
                }
         console.log(result)
@@ -329,7 +429,7 @@ DeleteAppointment:async(req,res,next)=>{
         console.log(error.message)
         if(error instanceof mongoose.CastError){
     
-            next(createError(400,"Invalid product id"))
+            next(createError(400,"Invalid Appointment id"))
             return;
         }
         next(error);
@@ -342,13 +442,13 @@ UpdateAppointmentById:async(req,res,next)=>{
     const id = req.params.id;
     const updates=req.body;
     const options={new :true}
-        // res.send("updating a single product")
+        // res.send("updating a single Appointment")
           try 
           {
            
             const result =await Appointment.findByIdAndUpdate(id,updates, options);
         
-            if(!result){throw createError(404,"Product does not exist ")}
+            if(!result){throw createError(404,"Appointment does not exist ")}
             res.send(result)
           } 
              
@@ -356,7 +456,7 @@ UpdateAppointmentById:async(req,res,next)=>{
           {
             console.log(error.message)
             if (error instanceof mongoose.CastError)
-            {return next(createError(400,"Invalid Product Id"))}
+            {return next(createError(400,"Invalid Appointment Id"))}
             next(error)
           }  
 },

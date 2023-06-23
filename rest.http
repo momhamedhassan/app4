@@ -3,19 +3,19 @@ POST http://localhost:3007/api/Agoralogin
 Content-Type: application/json
 
 {
-  "email":"newDoctor20323@gmail.com",
-    "password":"mohamedhassano",
-    "name":"saad mostafa",
-    "avatar":"https://www.apetogentleman.com/wp-content/uploads/2018/06/top-male-models.jpg",
-    "type":6,
-    "userType":1
+  "email":"drDiaaAhmed@gmail.com",
+    "password":"password",
+    "name":"Saad Mostafa",
+    "avatar":"https://th.bing.com/th/id/R.215c1ff399e961851cc11a7810886a0e?rik=oZfxvnavGwz6cA&riu=http%3a%2f%2fwww.writergirl.com%2fwp-content%2fuploads%2f2014%2f11%2fDoctor-790X1024.jpg&ehk=CmnYm47Si7SLogCKQcVQ9Onueou53ycpcjvFFc3Ej00%3d&risl=&pid=ImgRaw&r=0",
+    "type":7,
+    "userType":2
 }
 ### add doctor information
 POST http://localhost:3007/api/Doctors
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYyNjExNTAsImV4cCI6MTY4NjMwNDM1MCwiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.VES-mI9BnpmqZsdczjVOk2hWo2MYG2CxgNLKIOmOKLs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODc0OTk3NjUsImV4cCI6MTY4NzU0Mjk2NSwiYXVkIjoiXCI2NDk1MzNmNWJlMzU4MmEwOGQxZGE3OWZcIiJ9.DYj9U9g7F9W55FCBV9-b0_yYO3O-hCPKl_X7KtMtmp0
 Content-Type: application/json
 
-{"doctorSpeciality":"happy",
+{"doctorSpeciality":"Dentistry",
     "Rank":"12",
     "location":"alex",
     "experence_years":"2023",
@@ -24,8 +24,9 @@ Content-Type: application/json
 }
 
 ### get all doctors by speciality
-GET http://localhost:3007/api/Doctors/happy
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYxMzc3MjgsImV4cCI6MTY4NjE4MDkyOCwiYXVkIjoiXCI2NDdmZjUyZjQ0NDBlNDYzY2JhYTYxMDFcIiJ9.wqyrxwapzrkxLr2sjKuS7B2pt0NrjEvu0QuJ7tfu4OM
+GET http://localhost:3007/api/Doctors/Dentistry
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODc0ODQyMTksImV4cCI6MTY4NzUyNzQxOSwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.jSqLYriQW3bj7KBpieoxtdiaqgcA60jDgwFczPoLVvc
+
 
 
 ###Patient get doctor info by doctor id
@@ -42,14 +43,14 @@ GET http://localhost:3007/api/Doctors/get/647f78299f3f46f277ab7eb1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYwNzU0MzMsImV4cCI6MTY4NjExODYzMywiYXVkIjoiXCI2NDdmNzgyOTlmM2Y0NmYyNzdhYjdlYWZcIiJ9.j02Dm4FJDAXCN5zLj4LKgGZRgXxcYk8FbKTWJRG36SI
 ### Patient make payment
 GET  http://localhost:3007/api/Appointments/Payment
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY2MzU1ODAsImV4cCI6MTY4NjY3ODc4MCwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.35VaNhXPMwTGq0BhqSc-xz5yQ9LdmcavT0P4OiBSlXc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODc0MTQxNTEsImV4cCI6MTY4NzQ1NzM1MSwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.e3EUfimG_Wjj0OeOc4kX1MxiNzijZjicpZ68Czbq4Cc
 ### Patient make appointment
 POST http://localhost:3007/api/Appointments
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY2MzU1ODAsImV4cCI6MTY4NjY3ODc4MCwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.35VaNhXPMwTGq0BhqSc-xz5yQ9LdmcavT0P4OiBSlXc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODc0MTQxNTEsImV4cCI6MTY4NzQ1NzM1MSwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.e3EUfimG_Wjj0OeOc4kX1MxiNzijZjicpZ68Czbq4Cc
 Content-Type: application/json
 
 {
-  "paymentToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY2MzU1OTQsImV4cCI6MTY4NjYzNTg5NCwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.UKCK7yCF5w0O8yHeXyq18babOnhtHDqj2jjP0HD072A",
+  "paymentToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODc0MTQyMDEsImV4cCI6MTY4NzQxNDUwMSwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.Q4PWaD8jRfgGOYzqt3NYB6yj5BG_OZXuIvSaGrfNu1I",
   "Doctor":"64822b932cbfd0b0fd1ef453",
   "AppointmentDate":"2023",
    "AppointmentTime":"12",
@@ -61,13 +62,13 @@ Content-Type: application/json
 GET http://localhost:3007/api/Appointments/GetPatientAppointments/647f36fffd93948cd365d700
 
 ###Doctor Accept or deny
-GET  http://localhost:3007/api/Appointments/accept/647f4494dcfee4e8407f761a
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYxNDkyOTgsImV4cCI6MTY4NjE5MjQ5OCwiYXVkIjoiXCI2NDgwOThiMjNjNTM0NGVhMWYwMjdhZDJcIiJ9.fnfgG3u46CB4yflmcSWLhsuKagQ0l2-BqNNgemUYDuQ
+GET  http://localhost:3007/api/Appointments/accept/6493e5c52bef673b8287c95f
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODc0MTA5NzQsImV4cCI6MTY4NzQ1NDE3NCwiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.AmsPM-Ji6as-otVmeCbSO64VfK9A5g8HKVAJxVtkWAk
 
 
 ###Patient or Doctor Get accepted appointment(upcomming appointments)
 Get http://localhost:3007/api/Appointments/accepted
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODYxNDkyOTgsImV4cCI6MTY4NjE5MjQ5OCwiYXVkIjoiXCI2NDgwOThiMjNjNTM0NGVhMWYwMjdhZDJcIiJ9.fnfgG3u46CB4yflmcSWLhsuKagQ0l2-BqNNgemUYDuQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODczNjYwNTMsImV4cCI6MTY4NzQwOTI1MywiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.LeJanfGXx_x6vz3-hSEMumzQpRvvGDuyZe8ODQSV6Q4
 
 
 ###
@@ -85,11 +86,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgd
 
 ###Doctor make prescribtion
 POST http://localhost:3007/api/Appointments/addPrescribtion
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODU4OTIzNjgsImV4cCI6MTY4NTkzNTU2OCwiYXVkIjoiXCI2NDdiY2I1NjZlZDNjYmUyZWQyODc0NDVcIiJ9.FT8Eny_KZ3xXf26fFZhn2ior5pwcZtFGGrDkCl9jBWY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY3NTI2NDcsImV4cCI6MTY4Njc5NTg0NywiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.8e0p7NggQFFe01BfwtHsfqXKgYbFoANMflK00nKyBlU
 Content-Type: application/json
 
 { 
-  "appointmentId":"647ca8aee84b5a3af01b0e63",
+  "appointmentId":"6489cd4661aab4398a515e39",
   "Pills":[
         "647cd9c31db9ef594779d862"
       ]
@@ -153,9 +154,9 @@ Content-Type: application/json
 }
 
 
-### Get Appointment by id
+### Get patient prescribtion
 GET http://localhost:3007/api/Prescribtion/64847ed508970c9f5967eb38
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY0MDMwNjEsImV4cCI6MTY4NjQ0NjI2MSwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.ZDK_SsuudT31H80mZt2MaX6W88qPC2jXZczKjf4HgoI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY3NTI0NTksImV4cCI6MTY4Njc5NTY1OSwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.lS5eysPFCIGGb8tdL0PnR4QamAKSm8OwclA7eAH0KbQ
 ###Doctor get ArticleCommunication By id
 GET http://localhost:3007/api/ArticleCommunication/648254e3c4fe7fcb99e5a10d
 
@@ -193,24 +194,28 @@ GET http://localhost:3007/api/test
 
 
 ###Doctor add prescribtion (patch)
-PATCH http://localhost:3007/api/Prescribtion/64880460c3d3f5efe7408f93
+PATCH http://localhost:3007/api/Prescribtion/6493e6ea583c131c0f424ac1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY2MzM4NTcsImV4cCI6MTY4NjY3NzA1NywiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.gBiPDJcqXpYz3boIh_54hscf0h5ajCBqLuGppUqkKXk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODc0MTA5NzQsImV4cCI6MTY4NzQ1NDE3NCwiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.AmsPM-Ji6as-otVmeCbSO64VfK9A5g8HKVAJxVtkWAk
 
 {
   "Pills":
     [{
-    "pillId":"64847ac9b9185c64ede0991c",
+    "pillId":"64938a36977cf2362442179f",
     "StartDate":"2024",
     "FinishDate":"2023",
     "PillTime":"12:00",
     "HowToUse":"ashrabha",
     "Description":"711111 marat",
     "dose":4
-    }],
+    }
+    
+    ],
     "Activities":[{
-      "ActivityId":"6484951bb2686627210a3aa1"
+      "ActivityId":"64938a4b977cf236244217a1"
     }],
+    "nextAppointment":"2020",
+    "appointmentTime":"12",
     "isNext":true
 
 }
@@ -219,21 +224,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgd
 POST http://localhost:3007/api/Pills
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY0MDQxMzUsImV4cCI6MTY4NjQ0NzMzNSwiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.jbCY-UVKBgLnYQXQ7R0kdLksbrXMQHvpnTqZeCRsDm4
+
 {
   "Image":"https://i0.wp.com/healthpluscity.com/wp-content/uploads/2021/09/Untitled-2-3.png?resize=803%2C703&ssl=1",
-  "PillName":"tramadol",
-  "Number":"12"
+  "PillName":"Concor"
 }
 
-### admin create Activity
-POST http://localhost:3007/api/Activity
+
+###
+GET http://localhost:3007/api/Activity
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY0MDQxMzUsImV4cCI6MTY4NjQ0NzMzNSwiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.jbCY-UVKBgLnYQXQ7R0kdLksbrXMQHvpnTqZeCRsDm4
-
-{
-  "Image":"https://i0.wp.com/healthpluscity.com/wp-content/uploads/2021/09/Untitled-2-3.png?resize=803%2C703&ssl=1",
-  "ActiviryName":"tramadol"
-}
 
 
 ### get all prescribtion
@@ -244,21 +245,26 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgd
 
 
 ###Add Turn
-PATCH http://localhost:3007/api/Prescribtion/addTurn/64880460c3d3f5efe7408f93/6488463a20e6b16539c8722a
+PATCH http://localhost:3007/api/Prescribtion/addTurn/6493e5c52bef673b8287c95f/6493e5f32bef673b8287c96d
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY2MzU1ODAsImV4cCI6MTY4NjY3ODc4MCwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.35VaNhXPMwTGq0BhqSc-xz5yQ9LdmcavT0P4OiBSlXc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODc0MTA4NDUsImV4cCI6MTY4NzQ1NDA0NSwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.TtcPHE2lAEaXXRAGBem3awjCVqxIoqraGqUjwvLDaNg
 
 {
   "TurnTime":{"TimeOfturn":"Test"},
-  "Type":2
+  "Type":1
 }
-###find appointment by id
-GET http://localhost:3007/api/Appointments/64880460c3d3f5efe7408f93
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY2MzU1ODAsImV4cCI6MTY4NjY3ODc4MCwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.35VaNhXPMwTGq0BhqSc-xz5yQ9LdmcavT0P4OiBSlXc
 
+
+###find appointment by id
+GET http://localhost:3007/api/Appointments/GetPatientPastAppointments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODczOTMyMDcsImV4cCI6MTY4NzQzNjQwNywiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.bNYShV_AOKjaM7of57YAjRYPdBR-WRdGX_Nd5A9Zt9k
+
+###find appointment by id
+GET http://localhost:3007/api/Appointments/6493e5c52bef673b8287c95f
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODc0MTQxNTEsImV4cCI6MTY4NzQ1NzM1MSwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.e3EUfimG_Wjj0OeOc4kX1MxiNzijZjicpZ68Czbq4Cc
 ### get Prescribtion by id
-GET http://localhost:3007/api/Prescribtion/64880460c3d3f5efe7408f95
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY2MzU1ODAsImV4cCI6MTY4NjY3ODc4MCwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.35VaNhXPMwTGq0BhqSc-xz5yQ9LdmcavT0P4OiBSlXc
+GET http://localhost:3007/api/Prescribtion
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODczOTA4MTQsImV4cCI6MTY4NzQzNDAxNCwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.X3ZmSvNonzR-rUl9SDuUFKSvy0QVnq_JfjhmU9xP-P0
 
 ### delete pill from prescribtion 
 DELETE http://localhost:3007/api/Prescribtion/deletePill/648539ee9bfea954458d99d6/6487105c43fef90a08211c84
@@ -271,6 +277,24 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgd
 Get http://localhost:3007/api/Prescribtion/CompletedPill/64880460c3d3f5efe7408f93/64883baa428a3458e3e1806b
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY2MzU1ODAsImV4cCI6MTY4NjY3ODc4MCwiYXVkIjoiXCI2NDg0NzdkNGExY2NkMzE1N2FjODBjMWVcIiJ9.35VaNhXPMwTGq0BhqSc-xz5yQ9LdmcavT0P4OiBSlXc
 
+### admin create Activity
+POST http://localhost:3007/api/Activity
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2ODY0MDQxMzUsImV4cCI6MTY4NjQ0NzMzNSwiYXVkIjoiXCI2NDgyMmI5MzJjYmZkMGIwZmQxZWY0NTNcIiJ9.jbCY-UVKBgLnYQXQ7R0kdLksbrXMQHvpnTqZeCRsDm4
 
-### 
-GET http://localhost:3007/do-something
+{
+  "image":"https://teachmeanatomy.info/wp-content/uploads/Thorax-Cover-Photo.png",
+  "ActiviryName":"X-ray"
+}
+
+### Doctor get all Activity to choose it in prescribtion 
+GET http://localhost:3007/api/Activity
+
+
+
+### Doctor add activity by its id in prescribtion
+GET http://localhost:3007/api/Pills
+
+
+
+###Patient get prescribtion with populated activity and Pills

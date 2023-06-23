@@ -17,6 +17,10 @@ const PillRouter=require('./route/prescribtion/Pill.route')
 const ActivityRouter=require('./route/prescribtion/Activity.route')
 const PaymentRoute=require('./route/payment.route')
 const NewArticleRoute=require('./route/NewArticleRoute')
+const admin=require('firebase-admin');
+const fcm=require('@diavrank/fcm-notification');
+const serviceAccount=require('./final-project-agora-firebase-adminsdk-bnzot-b86370206b.json')
+const {RtcTokenBuilder, RtcRole, RtmTokenBuilder, RtmRole} = require('agora-access-token');
 const AgoraUser=require('./Models/AgoraUser');
 const app =express();
 require('dotenv').config();
@@ -25,6 +29,19 @@ const createError=require('http-errors');
 app.use(express.json());
 const dotenv =require('dotenv').config();
 const {verifyAccessToken}=require('./Database/jwt_helper')
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  messagingSenderId:'778941570464'
+});
+
+
+const nocache = (_, resp, next) => {
+    resp.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    resp.header('Expires', '-1');
+    resp.header('Pragma', 'no-cache');
+    next();
+  }
 
 
 
@@ -71,7 +88,7 @@ try {
 )
 
 app.get('/api/test',async(req,res,next)=>{
-    const date=new Date(2023,5,13,6,18,00)
+    const date=new Date(2023,5,13,6,18)
     // Do task at a date/time
     schadule.scheduleJob(date,function(){
         console.log("Task complete @ "+ new Date());
@@ -109,21 +126,165 @@ app.get('/do-something', (req, res) => {
 app.use('/api/articles',verifyAccessToken,NewArticleRoute);
 
 app.post('/api/bind_fcmtoken',verifyAccessToken,async(req,res,next)=>{
+    console.log("hello from bind fcm token")
     const userId=req.payload.aud.replace(/['"]+/g, '');
-    const fcmtoken=req.body.fcmtoken;
+    console.log(userId)
+    const fcmtoken=req.query.fcmtoken;
+    console.log(fcmtoken)
 
     try {
         if(!fcmtoken){
             res.json({code:-1,data:"",msg:"error getting the token"})
         }
         const updateFcmToken=await AgoraUser.findByIdAndUpdate({_id:userId},{fcmtoken:fcmtoken},{new:true});
-        res.json({code:-1,data:updateFcmToken,msg:"success"})
+        console.log(updateFcmToken);
+        res.json({code:-1,data:"",msg:"success"})
     } catch (error) {
     
         console.log(error.message);
         throw createError(404," error fcm token")
     }
 })
+app.post('/api/send_notice',verifyAccessToken,async (req, res)=> {
+  console.log("hello from send notice")
+    //caller information
+    const userId=req.payload.aud.replace(/['"]+/g, '');
+    console.log("... sender id ...",userId);
+    const caller=await AgoraUser.findById({_id:userId});
+    const user_avatar = caller.avatar;
+    const user_name = caller.name;
+  
+    //callee information
+    const to_token  = req.query.to_token;
+    const call_type = req.query.call_type;
+    const to_avatar = req.query.to_avatar;
+    const to_name   = req.query.to_name;
+    const doc_id    = req.query.doc_id || '';
+    //const fcmtoken  = req.query.fcmtoken;
+    //get the other user
+    const otherUser=await AgoraUser.findById({_id:to_token});
+    console.log(otherUser)
+
+    if (!res) {
+       res.status(404).json({ code: -1, data: '', msg: 'user does not exist' });
+    }
+    const device_token = otherUser.fcmtoken;
+  
+    try {
+      if (device_token) {
+        if (call_type === 'cancel') {
+          const message = {
+            token: device_token,
+            data: {
+              token: userId,
+              avatar: user_avatar,
+              name: user_name,
+              doc_id: doc_id,
+              call_type: call_type,
+            },
+          };
+         const result=await admin.messaging().send(message);
+         console.log(result)
+         res.status(200).json({ code: 0, data: to_token, msg: 'success' }); 
+           
+        } else if (call_type === 'voice') {
+          const message = {
+            token: device_token,
+            data: {
+              token: userId,
+              avatar: user_avatar,
+              name: user_name,
+              doc_id: doc_id,
+              call_type: call_type,
+            },
+            android: {
+              priority: 'high',
+              notification: {
+                channel_id: 'xxx',
+                title: 'Voice call made by ' + user_name,
+                body: 'Please click to answer the voice call',
+              },
+            },
+          };
+        //   admin.messaging().send(message,function(err,res){
+        //   if(err){
+        //       throw createError(500,`error fcm token ${err}` )
+        //   }else{
+        //     res.status(200).json({ code: 0, data: to_token, msg: 'success' });
+        //   }
+        //  });
+         const result=await admin.messaging().send(message);
+
+         console.log(result)
+          res.status(200).json({ code: 0, data: to_token, msg: 'success' }); 
+        
+        } else if (call_type === 'video') {
+          const message = {
+            token: device_token,
+            data: {
+              token: userId,
+              avatar: user_avatar,
+              name: user_name,
+              doc_id: doc_id,
+              call_type: call_type,
+            },
+            android: {
+              priority: 'high',
+              notification: {
+                channel_id: 'xxx',
+                title: 'Video call made by ' + user_name,
+                body: 'Please click to answer the video call',
+              },
+            },
+          };
+         
+          const result= admin.messaging().send(message);
+          
+          console.log(result)
+          res.status(200).json({ code: 0, data: to_token, msg: 'success' });
+        } else {
+           res.status(400).json({ code: -1, data: '', msg: 'invalid call type' });
+        }
+      } else {
+         res.status(400).json({ code: -1, data: '', msg: 'device token is empty' });
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+       res.status(500).json({ code: -1, data: '', msg: 'failed to send message' });
+    }
+  })
+  app.post('/api/get_rtc_token', nocache,verifyAccessToken ,async(req, res) => {
+    const APP_ID = process.env.APP_ID;
+    console.log(APP_ID);
+    const APP_CERTIFICATE = process.env.APP_CERTIFICATE;
+    console.log(APP_CERTIFICATE);
+    // set response header
+    res.header('Access-Control-Allow-Origin', '*');
+    // get channel name
+    const channelName = req.query.channel_name;
+    if (!channelName) {
+     res.status(400).json({ 'error': 'channel is required' });
+    }
+    // get uid
+    let uid =0;
+    // get role
+    let role=RtcRole.SUBSCRIBER;
+    // get the expire time
+    let expireTime = 7200;
+    // calculate privilege expire time
+    const currentTime = Math.floor(Date.now() / 1000);
+
+    const privilegeExpireTime = currentTime + expireTime;
+    // build the token
+    let token= RtcTokenBuilder.buildTokenWithUid(APP_ID, APP_CERTIFICATE, channelName, uid, role, privilegeExpireTime);
+    console.log(token)
+    // return the token
+    if(!token){
+        res.json({code:-1,data:'',msg:"token error"})
+    }
+    res.json({code:0,data:token,msg:"success"})
+   
+  } );  
 
 app.get('/api/Testing',async(req,res,next)=>{
     res.json({code:0});

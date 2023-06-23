@@ -4,12 +4,15 @@ const {verifyPayment}=require('./../Database/jwt_helper')
 const AppointmentController = require('../controllers/Appointment.controller');
 const PaymentController = require('../controllers/Payment.controller');
 
+
+router.get   ('/GetPatientPastAppointments/',AppointmentController.findAppointmentByPateintId);
 router.get   ('/pastAppointments')
 router.get   ('/accept/:appointmentId',AppointmentController.DoctorAcceptAppointment);
 router.get   ('/waitingReq/',AppointmentController.findWaitingAppointment);
 router.get   ('/Payment/',PaymentController.postPayment);
 router.get   ('/Canceled/',AppointmentController.getCanceledAppointments);
 router.get   ('/Cancel/:appointmentId',AppointmentController.doctorCancelAppointment);
+
 
 // Patient Get accepted appointment
 router.get   ('/accepted/',AppointmentController.getAcceptedAppointments);
@@ -18,7 +21,6 @@ router.get   ('/:id',AppointmentController.findAppointmentById);
 
 
 
-router.get   ('/GetPatientAppointments/:patientId',AppointmentController.findAppointmentByPateintId);
 //make appointment
 router.post  ('/',verifyPayment,AppointmentController.PostAppointment);
 //Doctor add prescribtion

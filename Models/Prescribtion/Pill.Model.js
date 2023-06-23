@@ -4,8 +4,7 @@ const ObjectId =mongoose.Types.ObjectId;
 const PillSchema = new Schema({
     
     Image:{type:String},
-    PillName:{type:String},
-    Number:{type:String}
+    PillName:{type:String}
     
     
 });

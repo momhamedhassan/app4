@@ -26,6 +26,7 @@ module.exports={
     },
     
     verifyAccessToken: (req, res, next) => {
+      console.log("...hello from verify Access tOKEN MIDDLEWARE");
         if (!req.headers['authorization']) return next(createError.Unauthorized())
         const authHeader = req.headers['authorization']
         const bearerToken = authHeader.split(' ')
