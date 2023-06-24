@@ -351,8 +351,17 @@ PostAppointment:async (req,res,next)=>{
     console.log(patientId);
     const doctorId=req.body.Doctor;
     console.log(doctorId);
+    console.log("... sender id ...",patientId);
+   
     const options={new :true}
     try { 
+        const caller=await AgoraUser.findById({_id:patientId});
+        const user_avatar = caller.avatar;
+        const user_name = caller.name;
+        
+    
+        const otherCaller=await AgoraUser.findById({_id:doctorId});
+        const device_token = otherCaller.fcmtoken;
         if(patientId==patientPaymentId){
 
             console.log('.....done appointment')
@@ -360,11 +369,34 @@ PostAppointment:async (req,res,next)=>{
         req.body['Patient']=patientId;
         console.log("......req body .....",req.body);
         const appointment= await Appointment.create(req.body);
+
+        const message = {
+            token: device_token,
+            data: {
+              token: patientId,
+              avatar: user_avatar,
+              name: user_name,
+              call_type: appointmentCreated,
+            },
+            android: {
+              priority: 'high',
+              notification: {
+                channel_id: 'xxx',
+                title: 'Appointment created by ' + user_name,
+                body: 'Please click to view',
+              },
+            },
+          };
+         
+          const r=await admin.messaging().send(message);
+          console.log(r);
+
     
         const appointmentWithPrescribtion=await Appointment.find(
             {_id:appointment.id}
         )
-        res.send(appointmentWithPrescribtion)}
+        res.send(appointmentWithPrescribtion)
+    }
         else{res.json({code:-1,data:{},msg:"invalid user"})}
         
         

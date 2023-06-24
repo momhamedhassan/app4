@@ -49,12 +49,9 @@ getArticleById:async (req,res,next)=>{
     
     const ArticleId=req.params.articleId;
 
- 
- 
     try 
     {
         console.log('.... hello from get article by id ...');
-       
         const articles=await Article.findById({_id:ArticleId},{__v:0}).populate(
             {path:'Doctor',
             model:Agorauser,

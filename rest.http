@@ -196,9 +196,6 @@ Content-Type: application/json
   "PateintCase":"",
   "Dignose":""
 }
-
-
-
 ###Doctor add prescribtion (patch)
 PATCH http://localhost:3007/api/Prescribtion/6493e6ea583c131c0f424ac1
 Content-Type: application/json
