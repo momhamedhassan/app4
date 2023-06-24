@@ -376,7 +376,7 @@ PostAppointment:async (req,res,next)=>{
               token: patientId,
               avatar: user_avatar,
               name: user_name,
-              call_type: appointmentCreated,
+              call_type: 'appointmentCreated',
             },
             android: {
               priority: 'high',
