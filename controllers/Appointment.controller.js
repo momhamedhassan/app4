@@ -271,12 +271,13 @@ DoctorAcceptAppointment:async(req,res,next)=>{
             const appointment =await Appointment.findById(AppointmentId);
             const patient=await AgoraUser.findById(appointment.Patient);
             const patientFCMToken=patient.fcmtoken;
+            console.log("... patient fcm token ...",patientFCMToken)
             console.log(appointment);
             console.log(appointment.Doctor);
             console.log(userId);
             if(appointment.Doctor==userId){
                 const result=await Appointment.findByIdAndUpdate({_id:AppointmentId},{accepted:true,canceled:false},{new:true})
-                if(result){
+                
                     const message = {
                         token: patientFCMToken,
                         data: {
@@ -297,9 +298,9 @@ DoctorAcceptAppointment:async(req,res,next)=>{
                      
                       const r=await admin.messaging().send(message);
                       console.log(r);
-                      
-                }
-                res.send(result)
+                      res.send(result)
+                
+                
 
             }
             else{throw createError(404,"invalid Doctor ")}
