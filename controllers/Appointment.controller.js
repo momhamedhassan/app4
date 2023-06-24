@@ -283,7 +283,7 @@ DoctorAcceptAppointment:async(req,res,next)=>{
                           token: userId,
                           avatar: user_avatar,
                           name: user_name,
-                          call_type: appointmentAccepted,
+                          call_type: 'appointmentAccepted',
                         },
                         android: {
                           priority: 'high',
